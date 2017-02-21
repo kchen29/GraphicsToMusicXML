@@ -8,6 +8,7 @@
 //#include <poppler/qt5/poppler-qt5.h>
 //#include <poppler-qt5.h>
 //#include <poppler/qt5/poppler-qt5.h>
+//#include <thirdparty/poppler/include/qt5/poppler-qt5.h>
 #include <thirdparty/poppler/include/qt5/poppler-qt5.h>
 
 namespace Ui {
