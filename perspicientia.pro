@@ -187,10 +187,11 @@ HEADERS  += gui.h
 FORMS    += gui.ui
 
 
-# INCLUDEPATH += thirdparty/poppler/include
+INCLUDEPATH += thirdparty/poppler/include
 
 # LIBS += -L/usr/include/poppler/qt5 -lpoppler-qt5
-unix|win32: LIBS += -L"thirdparty/poppler/lib" -lpoppler-qt5
+unix|win32: LIBS += -L"$$PWD/thirdparty/poppler/lib" -lpoppler-qt5
+# unix|win32: LIBS += -L"$$PWD/thirdparty/poppler/lib" -lpoppler-qt5
 
 #DISTFILES += \
 #    thirdparty/poppler/lib/libpoppler-cpp.so \
