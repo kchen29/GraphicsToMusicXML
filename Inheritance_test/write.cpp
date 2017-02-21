@@ -20,7 +20,12 @@ int main(void) {
     //Open file for output
    ofstream myfile;
    myfile.open ("test.xml");//, ios_base::app (for appending to file)
-   myfile << "Measure number (7) is :" << m.getNumber() << "\n";
+   
+   //Introduction
+   myfile <<"<?xml version=\"1.0\" encoding=\"UTF-8\"?> \n";
+   myfile <<"<!DOCTYPE score-partwise PUBLIC \"-//Recordare//DTD MusicXML 3.0 Partwise//EN\" http://www.musicxml.org/dtds/partwise.dtd\">";
+   myfile <<"<score-partwise version="3.0">\n";
+   myfile << "Measure number (10) is :" << m.getNumber() << "\n";
    myfile.close();
    return 0;
 }
