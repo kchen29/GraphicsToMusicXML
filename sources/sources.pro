@@ -29,3 +29,5 @@ SOURCES += main.cpp\
 HEADERS  += gui.h
 
 FORMS    += gui.ui
+
+LIBS += -L/usr/include/poppler/qt5 -lpoppler-qt5

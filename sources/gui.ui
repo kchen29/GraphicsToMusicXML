@@ -13,7 +13,13 @@
   <property name="windowTitle">
    <string>GUI</string>
   </property>
-  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QGraphicsView" name="graphicsView"/>
+    </item>
+   </layout>
+  </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
@@ -27,7 +33,7 @@
     <property name="title">
      <string>&amp;File</string>
     </property>
-    <addaction name="actionOpen_File"/>
+    <addaction name="action_Open_File"/>
     <addaction name="action_Export_Music_XML"/>
    </widget>
    <addaction name="menu_File"/>
@@ -41,7 +47,7 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <action name="actionOpen_File">
+  <action name="action_Open_File">
    <property name="text">
     <string>&amp;Open File...</string>
    </property>
