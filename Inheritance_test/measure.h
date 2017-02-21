@@ -7,19 +7,11 @@
 // forward declared dependencies
 #include "note.h"
 
-class measure{
-   public:
-      void setNumber(int n) { 
-         number = n; 
-      }
-      
-      int getNumber(){
-        return number;
-      }
-      
-   protected:
-        int number;
-        note n;
+class Measure{
+public:
+    int number;
+    Note *n;
+    Measure *m;
 };
 
 #endif // __MEASURE_H_INCLUDED__ 

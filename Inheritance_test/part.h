@@ -7,19 +7,12 @@
 // forward declared dependencies
 #include "measure.h"
 
-class part  {
-   public:
-      void setPart(int p) {
-         part = p;
-      }
-      
-       int getPart(){
-        return part;
-      }
-		
-   protected:
-      int part;
-      measure m;
+class Part  {
+public:
+    int part;
+    Measure *m;
+
+    std::string writeXML();
 };
 
 #endif // __PART_H_INCLUDED__ 

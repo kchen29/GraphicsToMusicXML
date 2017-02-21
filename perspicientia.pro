@@ -24,9 +24,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        gui.cpp
+        gui.cpp \
+    Inheritance_test/write.cpp \
 
-HEADERS  += gui.h
+HEADERS  += gui.h \
+    Inheritance_test/measure.h \
+    Inheritance_test/note.h \
+    Inheritance_test/part.h \
+    Inheritance_test/write.h
+
 FORMS    += gui.ui
 
 unix: CONFIG += link_pkgconfig

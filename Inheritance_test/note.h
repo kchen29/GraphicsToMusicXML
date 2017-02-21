@@ -5,24 +5,17 @@
 
 //=================================
 // forward declared dependencies
-class note{
-   public:
-      void setPitch(int s, int o) { 
-         step = s;
-         octave = o;  
+class Note{
+public:
+    int step;
+    int octave;
+    Note *n;
+    /*
+      string printNote(){
+        return "HELLO";
       }
+      */
 
-      int getStep(){
-        return step;
-      }
-      
-      int getOctave(){
-        return octave;
-      }
-      
-   private:
-      int step;
-      int octave;
 };
 
 
