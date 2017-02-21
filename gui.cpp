@@ -17,6 +17,7 @@ GUI::GUI(QWidget *parent) :
       ui->graphicsView->setDragMode(QGraphicsView::ScrollHandDrag);
 
       connect(ui->action_Open_File, &QAction::triggered, this, &GUI::openPdf);
+      document = 0;
       }
 
 GUI::~GUI()

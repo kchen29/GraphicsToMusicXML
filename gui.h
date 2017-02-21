@@ -3,13 +3,7 @@
 
 #include <QMainWindow>
 #include <QGraphicsScene>
-//#include <poppler/qt5/poppler-qt5.h>
-//#include <thirdparty/poppler/qt5/poppler-qt5.h>
-//#include <poppler/qt5/poppler-qt5.h>
-//#include <poppler-qt5.h>
-//#include <poppler/qt5/poppler-qt5.h>
-//#include <thirdparty/poppler/include/qt5/poppler-qt5.h>
-#include <thirdparty/poppler/include/qt5/poppler-qt5.h>
+#include <poppler/qt5/poppler-qt5.h>
 
 namespace Ui {
 class GUI;
@@ -34,6 +28,7 @@ private slots:
 private:
       Ui::GUI *ui;
 
+      bool openedDoc;
       Poppler::Document *document;
       QPixmap pagePixmap;
 
