@@ -30,4 +30,7 @@ HEADERS  += gui.h
 
 FORMS    += gui.ui
 
-LIBS += -L/usr/include/poppler/qt5 -lpoppler-qt5
+# LIBS += -L/usr/include/poppler/qt5 -lpoppler-qt5
+# LIBS += -Lthirdparty/poppler/qt5 -lpoppler-qt5
+
+unix|win32: LIBS += -lpoppler-qt5
