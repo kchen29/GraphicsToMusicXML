@@ -10,29 +10,29 @@ class GUI;
 }
 
 class GUI : public QMainWindow
-      {
-      Q_OBJECT
+{
+    Q_OBJECT
 
 public:
-      explicit GUI(QWidget *parent = 0);
-      ~GUI();
+    explicit GUI(QWidget *parent = 0);
+    ~GUI();
 
-      void updateScene();
+    void updateScene();
 
-      bool getPdf();
-      void getPagePixmap();
+    bool getPdf();
+    void getPagePixmap();
 
 private slots:
-      void openPdf();
+    void openPdf();
 
 private:
-      Ui::GUI *ui;
+    Ui::GUI *ui;
 
-      Poppler::Document *document;
-      QPixmap pagePixmap;
+    Poppler::Document *document;
+    QPixmap pagePixmap;
 
-      QGraphicsScene *scene;
-      QGraphicsView *view;
-      };
+    QGraphicsScene *scene;
+    QGraphicsView *view;
+};
 
 #endif // GUI_H
