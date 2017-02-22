@@ -11,10 +11,10 @@ GUI::GUI(QWidget *parent) :
       ui->setupUi(this);
 
       scene = new QGraphicsScene(this);
-
-      ui->graphicsView->setScene(scene);
-      ui->graphicsView->setBackgroundBrush(QBrush(Qt::gray));
-      ui->graphicsView->setDragMode(QGraphicsView::ScrollHandDrag);
+      view = ui->graphicsView;
+      view->setScene(scene);
+      view->setBackgroundBrush(QBrush(Qt::gray));
+      view->setDragMode(QGraphicsView::ScrollHandDrag);
 
       connect(ui->action_Open_File, &QAction::triggered, this, &GUI::openPdf);
       document = 0;

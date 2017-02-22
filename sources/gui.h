@@ -28,11 +28,11 @@ private slots:
 private:
       Ui::GUI *ui;
 
-      bool openedDoc;
       Poppler::Document *document;
       QPixmap pagePixmap;
 
       QGraphicsScene *scene;
+      QGraphicsView *view;
       };
 
 #endif // GUI_H

@@ -23,17 +23,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 
-SOURCES += main.cpp\
-        gui.cpp \
-    Inheritance_test/write.cpp \
+SOURCES += sources/gui.cpp \
+    sources/main.cpp \
+    sources/write.cpp
 
-HEADERS  += gui.h \
-    Inheritance_test/measure.h \
-    Inheritance_test/note.h \
-    Inheritance_test/part.h \
-    Inheritance_test/write.h
+HEADERS  += sources/gui.h \
+    sources/measure.h \
+    sources/note.h \
+    sources/part.h \
+    sources/write.h
 
-FORMS    += gui.ui
+FORMS    += sources/gui.ui
 
 unix: CONFIG += link_pkgconfig
 unix: PKGCONFIG += poppler-qt5
