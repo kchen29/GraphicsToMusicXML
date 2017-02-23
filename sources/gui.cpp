@@ -17,7 +17,6 @@ GUI::GUI(QWidget *parent) :
     view->setDragMode(QGraphicsView::ScrollHandDrag);
 
     connect(ui->action_Open_File, &QAction::triggered, this, &GUI::openPdf);
-    document = 0;
 }
 
 GUI::~GUI()
@@ -28,7 +27,9 @@ GUI::~GUI()
 
 bool GUI::getPdf()
 {
-    QString filename = QFileDialog::getOpenFileName();
+    QString filter = "PDF (*.pdf)";
+    QString filename = QFileDialog::getOpenFileName(this, "Open File",
+                                                    QString(), filter);
 
     Poppler::Document *tempDocument = Poppler::Document::load(filename);
 

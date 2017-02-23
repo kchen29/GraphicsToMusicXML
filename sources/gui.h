@@ -28,7 +28,7 @@ private slots:
 private:
     Ui::GUI *ui;
 
-    Poppler::Document *document;
+    Poppler::Document *document = 0;
     QPixmap pagePixmap;
 
     QGraphicsScene *scene;
