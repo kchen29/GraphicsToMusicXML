@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QGraphicsScene>
+#include <QGraphicsView>
 #include <poppler/qt5/poppler-qt5.h>
 
 namespace Ui {
@@ -24,6 +25,7 @@ public:
 
 private slots:
     void openPdf();
+    void putNode(QMouseEvent *m);
 
 private:
     Ui::GUI *ui;

@@ -2,6 +2,7 @@
 #include <QAction>
 #include "gui.h"
 #include "ui_gui.h"
+#include "graphicsviewfilter.h"
 #include <QDebug>
 
 GUI::GUI(QWidget *parent) :
@@ -15,6 +16,10 @@ GUI::GUI(QWidget *parent) :
     view->setScene(scene);
     view->setBackgroundBrush(QBrush(Qt::gray));
     view->setDragMode(QGraphicsView::ScrollHandDrag);
+
+    GraphicsViewFilter *filter = new GraphicsViewFilter(this);
+    view->viewport()->installEventFilter(filter);
+    connect(filter, &GraphicsViewFilter::clicked, this, &GUI::putNode);
 
     connect(ui->action_Open_File, &QAction::triggered, this, &GUI::openPdf);
 }
@@ -92,4 +97,12 @@ void GUI::openPdf()
         return;
 
     updateScene();
+}
+
+//the mouse event is in view coordinates
+void GUI::putNode(QMouseEvent *m)
+{
+    //qDebug() << "Putting node at x: " << m->x() << "\ty: " << m->y();
+    //Open Dialog to choose type of node
+    //add node
 }
