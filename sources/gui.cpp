@@ -4,6 +4,7 @@
 #include "ui_gui.h"
 #include "graphicsviewfilter.h"
 #include "node.h"
+#include "nodedialog.h"
 #include <QDebug>
 
 GUI::GUI(QWidget *parent) :
@@ -104,10 +105,16 @@ void GUI::cmdAddNode(QMouseEvent *m)
 {
     //qDebug() << "Putting node at x: " << m->x() << "\ty: " << m->y();
     //Open Dialog to choose type of node
+    QPoint viewPos = m->pos();
+    QPointF scenePos = view->mapToScene(viewPos);
+
+    NodeDialog *nodeDialog = new NodeDialog(scenePos, this);
+    nodeDialog->move(m->globalPos());
+
+    if (!nodeDialog->exec())
+        return;
 
     //add node
-    QPointF scenePos = view->mapToScene( m->pos() );
-    //node for now
-    Node *node = new Node(scenePos);
+    Node *node = nodeDialog->node;
     scene->addItem(node);
 }
