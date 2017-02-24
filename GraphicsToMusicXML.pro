@@ -26,14 +26,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += sources/gui.cpp \
     sources/main.cpp \
     sources/write.cpp \
-    sources/graphicsviewfilter.cpp
+    sources/graphicsviewfilter.cpp \
+    sources/node.cpp
 
 HEADERS  += sources/gui.h \
     sources/measure.h \
     sources/note.h \
     sources/part.h \
     sources/write.h \
-    sources/graphicsviewfilter.h
+    sources/graphicsviewfilter.h \
+    sources/node.h
 
 FORMS    += sources/gui.ui
 

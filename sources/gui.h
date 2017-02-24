@@ -25,7 +25,7 @@ public:
 
 private slots:
     void openPdf();
-    void putNode(QMouseEvent *m);
+    void cmdAddNode(QMouseEvent *m);
 
 private:
     Ui::GUI *ui;
