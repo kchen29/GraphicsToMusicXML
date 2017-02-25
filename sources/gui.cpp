@@ -4,6 +4,8 @@
 #include "ui_gui.h"
 #include "graphicsviewfilter.h"
 #include "nodedialog.h"
+#include "link.h"
+#include "part.h"
 #include <QDebug>
 
 GUI::GUI(QWidget *parent) :
@@ -20,7 +22,7 @@ GUI::GUI(QWidget *parent) :
     GraphicsViewFilter *filter = new GraphicsViewFilter(this);
     view->viewport()->installEventFilter(filter);
     connect(filter, &GraphicsViewFilter::leftPressed, this, &GUI::cmdAddNode);
-    connect(filter, &GraphicsViewFilter::rightPressRelease, this, &GUI::cmdLink);
+    connect(filter, &GraphicsViewFilter::rightPressRelease, this, &GUI::cmdAddLink);
 
     connect(ui->action_Open_File, &QAction::triggered, this, &GUI::openPdf);
 }
@@ -119,11 +121,10 @@ void GUI::cmdAddNode(QMouseEvent *m)
     scene->addItem(node);
 }
 
-//add link
-//1. see if there are nodes at press and at release
-//2. see if link can be made
-void GUI::cmdLink(QPoint press, QPoint release)
+//points in view coordinates
+void GUI::cmdAddLink(QPoint press, QPoint release)
 {
+    //nodes at press and release?
     QGraphicsItem *pressItem = view->itemAt(press);
     QGraphicsItem *releaseItem = view->itemAt(release);
 
@@ -138,12 +139,20 @@ void GUI::cmdLink(QPoint press, QPoint release)
         return;
     }
 
-    link(pressNode, releaseNode);
+    //can link?
+    if (!link(pressNode, releaseNode)) {
+        qDebug() << "Error: Can't link.";
+        return;
+    }
+
+    //show link in graphics
+    new Link(pressNode, releaseNode);
 }
 
 //given from and to, see if they can be linked
-void GUI::link(Node *from, Node *to)
+bool GUI::link(Node *from, Node *to)
 {
+    /*
     switch (from->type()) {
     case Node::PartType:
         qDebug() << "From is type Part";
@@ -161,4 +170,16 @@ void GUI::link(Node *from, Node *to)
         qDebug() << "To is type Measure";
         break;
     }
+    */
+    switch (from->type()) {
+    case Node::MeasureType:
+        Measure *measure = static_cast<Measure *>(from);
+        if (to->type() == Node::PartType) {
+            Part *part = static_cast<Part *>(to);
+            part->firstMeasure = measure;
+            return true;
+        }
+    }
+
+    return false;
 }

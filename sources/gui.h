@@ -28,10 +28,10 @@ public:
 private slots:
     void openPdf();
     void cmdAddNode(QMouseEvent *m);
-    void cmdLink(QPoint press, QPoint release);
+    void cmdAddLink(QPoint press, QPoint release);
 
 private:
-    void link(Node *from, Node *to);
+    bool link(Node *from, Node *to);
 
     Ui::GUI *ui;
 

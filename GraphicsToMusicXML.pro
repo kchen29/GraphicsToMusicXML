@@ -28,15 +28,18 @@ SOURCES += sources/gui.cpp \
     sources/graphicsviewfilter.cpp \
     sources/node.cpp \
     sources/nodedialog.cpp \
+    sources/link.cpp \
     sources/part.cpp \
     sources/measure.cpp \
     sources/note.cpp \
     sources/xmlwriter.cpp
 
+
 HEADERS  += sources/gui.h \
     sources/graphicsviewfilter.h \
     sources/node.h \
     sources/nodedialog.h \
+    sources/link.h \
     sources/part.h \
     sources/measure.h \
     sources/note.h \

@@ -11,7 +11,7 @@ public:
         MeasureType,
     };
 
-    Node(QPointF center, QGraphicsItem *parent = 0);
+    Node(QPointF center, QGraphicsItem *parent = nullptr);
 
     static constexpr qreal RADIUS = 8;
 };
