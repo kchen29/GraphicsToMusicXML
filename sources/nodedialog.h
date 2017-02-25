@@ -21,8 +21,7 @@ public slots:
     void buttonClicked();
 
 private:
-    //"Node" is temporary
-    const QStringList nodeClasses = {"Node", "Part"};
+    const QStringList nodeClasses = {"Part", "Measure"};
     QLabel *label;
     QComboBox *combo;
     QPushButton *button;

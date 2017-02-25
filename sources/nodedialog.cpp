@@ -1,5 +1,6 @@
 #include <QHBoxLayout>
 #include "nodedialog.h"
+#include "part.h"
 
 NodeDialog::NodeDialog(QPointF setCenter, QWidget *parent) : QDialog(parent), center(setCenter)
 {
@@ -26,7 +27,10 @@ void NodeDialog::buttonClicked()
 {
     switch(combo->currentIndex()) {
     case 0:
-        node = new Node(center);
+        node = new Part(center);
+        break;
+    case 1:
+        node = new Measure(center);
         break;
     default:
         break;

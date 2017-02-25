@@ -1,15 +1,18 @@
 #ifndef PART_H
 #define PART_H
 
+#include "node.h"
 #include "measure.h"
 
-class Part
+class Part : public Node
 {
 public:
-    Part();
+    Part(QPointF center, QGraphicsItem *parent = 0);
 
     int part;
     Measure *firstMeasure;
+
+    int type() const {return PartType;}
 };
 
 #endif // PART_H

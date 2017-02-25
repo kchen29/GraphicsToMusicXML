@@ -6,6 +6,8 @@
 #include <QGraphicsView>
 #include <poppler/qt5/poppler-qt5.h>
 
+#include "node.h"
+
 namespace Ui {
 class GUI;
 }
@@ -26,8 +28,11 @@ public:
 private slots:
     void openPdf();
     void cmdAddNode(QMouseEvent *m);
+    void cmdLink(QPoint press, QPoint release);
 
 private:
+    void link(Node *from, Node *to);
+
     Ui::GUI *ui;
 
     Poppler::Document *document = 0;

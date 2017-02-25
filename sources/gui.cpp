@@ -3,7 +3,6 @@
 #include "gui.h"
 #include "ui_gui.h"
 #include "graphicsviewfilter.h"
-#include "node.h"
 #include "nodedialog.h"
 #include <QDebug>
 
@@ -20,7 +19,8 @@ GUI::GUI(QWidget *parent) :
 
     GraphicsViewFilter *filter = new GraphicsViewFilter(this);
     view->viewport()->installEventFilter(filter);
-    connect(filter, &GraphicsViewFilter::clicked, this, &GUI::cmdAddNode);
+    connect(filter, &GraphicsViewFilter::leftPressed, this, &GUI::cmdAddNode);
+    connect(filter, &GraphicsViewFilter::rightPressRelease, this, &GUI::cmdLink);
 
     connect(ui->action_Open_File, &QAction::triggered, this, &GUI::openPdf);
 }
@@ -117,4 +117,48 @@ void GUI::cmdAddNode(QMouseEvent *m)
     //add node
     Node *node = nodeDialog->node;
     scene->addItem(node);
+}
+
+//add link
+//1. see if there are nodes at press and at release
+//2. see if link can be made
+void GUI::cmdLink(QPoint press, QPoint release)
+{
+    QGraphicsItem *pressItem = view->itemAt(press);
+    QGraphicsItem *releaseItem = view->itemAt(release);
+
+    Node *pressNode = dynamic_cast<Node *>(pressItem);
+    Node *releaseNode = dynamic_cast<Node *>(releaseItem);
+
+    if (!pressNode || !releaseNode) {
+        qDebug() << "No press/release item(s)";
+        return;
+    } else if (pressNode == releaseNode) {
+        qDebug() << "Error: linking object to itself";
+        return;
+    }
+
+    link(pressNode, releaseNode);
+}
+
+//given from and to, see if they can be linked
+void GUI::link(Node *from, Node *to)
+{
+    switch (from->type()) {
+    case Node::PartType:
+        qDebug() << "From is type Part";
+        break;
+    case Node::MeasureType:
+        qDebug() << "From is type Measure";
+        break;
+    }
+
+    switch (to->type()) {
+    case Node::PartType:
+        qDebug() << "To is type Part";
+        break;
+    case Node::MeasureType:
+        qDebug() << "To is type Measure";
+        break;
+    }
 }

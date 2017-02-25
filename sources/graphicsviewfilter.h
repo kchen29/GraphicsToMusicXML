@@ -11,10 +11,13 @@ public:
     explicit GraphicsViewFilter(QObject *parent = 0) : QObject(parent) {}
 
 signals:
-    void clicked(QMouseEvent *m);
+    void leftPressed(QMouseEvent *m);
+    void rightPressRelease(QPoint press, QPoint release);
 
 protected:
     bool eventFilter(QObject *obj, QEvent *event);
+
+    QPoint lastRightPress;
 };
 
 #endif // GRAPHICSVIEWFILTER_H
