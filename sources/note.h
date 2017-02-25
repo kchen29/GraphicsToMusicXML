@@ -1,22 +1,15 @@
-//=================================
-// include guard
-#ifndef __NOTE_H_INCLUDED__
-#define __NOTE_H_INCLUDED__
+#ifndef NOTE_H
+#define NOTE_H
 
-//=================================
-// forward declared dependencies
-class Note{
+
+class Note
+{
 public:
+    Note();
+
     int step;
     int octave;
-    Note *n;
-    /*
-      string printNote(){
-        return "HELLO";
-      }
-    */
-
+    Note *nextNote;
 };
 
-
-#endif // __NOTE_H_INCLUDED__ 
+#endif // NOTE_H

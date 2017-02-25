@@ -25,19 +25,22 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += sources/gui.cpp \
     sources/main.cpp \
-    sources/write.cpp \
     sources/graphicsviewfilter.cpp \
     sources/node.cpp \
-    sources/nodedialog.cpp
+    sources/nodedialog.cpp \
+    sources/part.cpp \
+    sources/measure.cpp \
+    sources/note.cpp \
+    sources/xmlwriter.cpp
 
 HEADERS  += sources/gui.h \
-    sources/measure.h \
-    sources/note.h \
-    sources/part.h \
-    sources/write.h \
     sources/graphicsviewfilter.h \
     sources/node.h \
-    sources/nodedialog.h
+    sources/nodedialog.h \
+    sources/part.h \
+    sources/measure.h \
+    sources/note.h \
+    sources/xmlwriter.h
 
 FORMS    += sources/gui.ui
 

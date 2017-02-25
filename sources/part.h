@@ -1,18 +1,15 @@
-//=================================
-// include guard
-#ifndef __PART_H_INCLUDED__
-#define __PART_H_INCLUDED__
+#ifndef PART_H
+#define PART_H
 
-//=================================
-// forward declared dependencies
 #include "measure.h"
 
-class Part  {
+class Part
+{
 public:
-    int part;
-    Measure *m;
+    Part();
 
-    std::string writeXML();
+    int part;
+    Measure *firstMeasure;
 };
 
-#endif // __PART_H_INCLUDED__ 
+#endif // PART_H

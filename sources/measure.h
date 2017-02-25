@@ -1,17 +1,16 @@
-//=================================
-// include guard
-#ifndef __MEASURE_H_INCLUDED__
-#define __MEASURE_H_INCLUDED__
+#ifndef MEASURE_H
+#define MEASURE_H
 
-//=================================
-// forward declared dependencies
 #include "note.h"
 
-class Measure{
+class Measure
+{
 public:
+    Measure();
+
     int number;
-    Note *n;
-    Measure *m;
+    Note *firstNote;
+    Measure *nextMeasure;
 };
 
-#endif // __MEASURE_H_INCLUDED__ 
+#endif // MEASURE_H

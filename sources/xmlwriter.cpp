@@ -1,21 +1,20 @@
-#include <iostream>
-#include <fstream>
-#include "part.h"
-#include "measure.h"
-#include "note.h"
-#include "write.h"
+#include "xmlwriter.h"
 
-void Write::writeXML() {
+XmlWriter::XmlWriter()
+{
 
-    Part p;
+}
+
+/* leftover from write.cpp
+    //Part p;
     Measure m;
-    Note n;
+    //Note n;
 
     //Set values
-    p.part = 5;
+    //p.part = 5;
     m.number = 7;
-    n.octave = 6;
-    n.step = 4;
+    //n.octave = 6;
+    //n.step = 4;
 
     //Open file for output
     std::ofstream myfile;
@@ -27,4 +26,4 @@ void Write::writeXML() {
     myfile <<"<score-partwise version=\"3.0\">\n";
     myfile << "Measure number (0) is :" << m.number << "\n";
     myfile.close();
-}
+    */
