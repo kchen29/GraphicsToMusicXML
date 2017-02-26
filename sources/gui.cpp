@@ -1,9 +1,10 @@
 #include <QFileDialog>
+#include <QToolBar>
 #include <QAction>
+
 #include "gui.h"
 #include "ui_gui.h"
 #include "graphicsviewfilter.h"
-#include "nodedialog.h"
 #include "link.h"
 #include "part.h"
 #include <QDebug>
@@ -23,6 +24,9 @@ GUI::GUI(QWidget *parent) :
     view->viewport()->installEventFilter(filter);
     connect(filter, &GraphicsViewFilter::leftPressed, this, &GUI::cmdAddNode);
     connect(filter, &GraphicsViewFilter::rightPressRelease, this, &GUI::cmdAddLink);
+
+    nodeChooser = new NodeChooser(this);
+    ui->mainToolBar->addWidget(nodeChooser);
 
     connect(ui->action_Open_File, &QAction::triggered, this, &GUI::openPdf);
 }
@@ -105,19 +109,11 @@ void GUI::openPdf()
 //the mouse event is in view coordinates
 void GUI::cmdAddNode(QMouseEvent *m)
 {
-    //qDebug() << "Putting node at x: " << m->x() << "\ty: " << m->y();
-    //Open Dialog to choose type of node
     QPoint viewPos = m->pos();
     QPointF scenePos = view->mapToScene(viewPos);
 
-    NodeDialog *nodeDialog = new NodeDialog(scenePos, this);
-    nodeDialog->move(m->globalPos());
-
-    if (!nodeDialog->exec())
-        return;
-
-    //add node
-    Node *node = nodeDialog->node;
+    Node *node = nodeChooser->currentNode();
+    node->setPos(scenePos);
     scene->addItem(node);
 }
 

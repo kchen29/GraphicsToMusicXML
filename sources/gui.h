@@ -4,9 +4,12 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include <QComboBox>
+
 #include <poppler/qt5/poppler-qt5.h>
 
 #include "node.h"
+#include "nodechooser.h"
 
 namespace Ui {
 class GUI;
@@ -41,6 +44,7 @@ private:
 
     QGraphicsScene *scene;
     QGraphicsView *view;
+    NodeChooser *nodeChooser;
 };
 
 #endif // GUI_H

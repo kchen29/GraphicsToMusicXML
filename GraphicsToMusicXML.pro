@@ -27,7 +27,7 @@ SOURCES += sources/gui.cpp \
     sources/main.cpp \
     sources/graphicsviewfilter.cpp \
     sources/node.cpp \
-    sources/nodedialog.cpp \
+    sources/nodechooser.cpp \
     sources/link.cpp \
     sources/part.cpp \
     sources/measure.cpp \
@@ -38,7 +38,7 @@ SOURCES += sources/gui.cpp \
 HEADERS  += sources/gui.h \
     sources/graphicsviewfilter.h \
     sources/node.h \
-    sources/nodedialog.h \
+    sources/nodechooser.h \
     sources/link.h \
     sources/part.h \
     sources/measure.h \

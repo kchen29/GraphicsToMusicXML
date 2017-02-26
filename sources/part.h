@@ -7,7 +7,7 @@
 class Part : public Node
 {
 public:
-    Part(QPointF center, QGraphicsItem *parent = 0);
+    Part(QGraphicsItem *parent = nullptr);
 
     int part;
     Measure *firstMeasure;

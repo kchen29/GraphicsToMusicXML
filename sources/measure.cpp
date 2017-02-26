@@ -1,6 +1,6 @@
 #include "measure.h"
 
-Measure::Measure(QPointF center, QGraphicsItem *parent) : Node(center, parent)
+Measure::Measure(QGraphicsItem *parent) : Node(parent)
 {
 
 }

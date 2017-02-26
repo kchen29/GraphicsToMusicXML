@@ -12,7 +12,9 @@ public:
         NoteType
     };
 
-    Node(QPointF center, QGraphicsItem *parent = nullptr);
+    Node(QGraphicsItem *parent = nullptr);
+
+    static const QStringList nodeClasses;
 
     static constexpr qreal RADIUS = 8;
 };

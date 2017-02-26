@@ -1,6 +1,6 @@
 #include "part.h"
 
-Part::Part(QPointF center, QGraphicsItem *parent) : Node(center, parent)
+Part::Part(QGraphicsItem *parent) : Node(parent)
 {
 
 }

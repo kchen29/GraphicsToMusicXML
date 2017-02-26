@@ -6,7 +6,7 @@
 class Note : public Node
 {
 public:
-    Note(QPointF center, QGraphicsItem *parent = 0);
+    Note(QGraphicsItem *parent = nullptr);
 
     int step;
     int octave;
