@@ -161,6 +161,8 @@ Node *GUI::findFirstNodeAt(QPoint point)
 //given from and to, see if they can be linked
 bool GUI::link(Node *from, Node *to)
 {
+    qDebug() << from->childItems();
+
     //use braces for each case that static casts
     switch (from->type()) {
     case Node::MeasureType:
@@ -171,6 +173,11 @@ bool GUI::link(Node *from, Node *to)
         case Node::PartType:
         {
             Part *part = static_cast<Part *>(to);
+            if (part->firstMeasure) {
+                if (part->firstMeasure == measure)
+                    return false;
+                removeLink(part->firstMeasure, to);
+            }
             part->firstMeasure = measure;
             return true;
         }
@@ -208,4 +215,24 @@ bool GUI::link(Node *from, Node *to)
     }
 
     return false;
+}
+
+void GUI::removeLink(Node *from, Node *to)
+{
+    //temporary implementation?
+    QList<QGraphicsItem *> children = from->childItems();
+
+    QMutableListIterator<QGraphicsItem *> i(children);
+
+    while (i.hasNext()) {
+        Link *link = dynamic_cast<Link *>(i.next());
+        if (!link)
+            continue;
+        if (link->to == to) {
+            delete link;
+            return;
+        }
+    }
+
+    qDebug() << "No link connecting?";
 }

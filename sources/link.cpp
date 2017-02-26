@@ -4,7 +4,7 @@
 #include "link.h"
 
 Link::Link(Node *fromNode, Node *toNode)
-    : QGraphicsItem(fromNode)
+    : QGraphicsItem(fromNode), to(toNode)
 {
     //local coordinates
     QPointF endpoint = toNode->pos() - fromNode->pos();
