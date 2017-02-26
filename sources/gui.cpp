@@ -21,7 +21,7 @@ GUI::GUI(QWidget *parent) :
     view->setScene(scene);
     view->setBackgroundBrush(QBrush(Qt::gray));
 
-    GraphicsViewFilter *filter = new GraphicsViewFilter(this);
+    GraphicsViewFilter *filter = new GraphicsViewFilter(view);
     view->viewport()->installEventFilter(filter);
     connect(filter, &GraphicsViewFilter::leftPressed, this, &GUI::cmdAddNode);
     connect(filter, &GraphicsViewFilter::rightPressRelease, this, &GUI::cmdAddLink);
