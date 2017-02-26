@@ -4,7 +4,6 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QGraphicsView>
-#include <QComboBox>
 
 #include <poppler/qt5/poppler-qt5.h>
 

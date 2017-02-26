@@ -1,13 +1,14 @@
 #include <QFileDialog>
 #include <QToolBar>
 #include <QAction>
+#include <QDebug>
 
 #include "gui.h"
 #include "ui_gui.h"
 #include "graphicsviewfilter.h"
 #include "link.h"
 #include "part.h"
-#include <QDebug>
+
 
 GUI::GUI(QWidget *parent) :
     QMainWindow(parent),

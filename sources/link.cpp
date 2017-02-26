@@ -1,7 +1,7 @@
 #include <QPainter>
 #include <QtMath>
+
 #include "link.h"
-#include <QDebug>
 
 Link::Link(Node *fromNode, Node *toNode)
     : QGraphicsItem(fromNode)
@@ -30,7 +30,7 @@ void Link::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     Q_UNUSED(option);
     Q_UNUSED(widget);
 
-    painter->setPen(Qt::green);
+    painter->setPen(QColor(255, 0, 255));
     painter->drawPath(path);
 }
 
