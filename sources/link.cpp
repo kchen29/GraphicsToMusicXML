@@ -31,6 +31,7 @@ void Link::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     Q_UNUSED(widget);
 
     painter->setPen(QColor(255, 0, 255));
+    painter->setRenderHint(QPainter::Antialiasing);
     painter->drawPath(path);
 }
 
