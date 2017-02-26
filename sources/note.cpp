@@ -1,6 +1,6 @@
 #include "note.h"
 
-Note::Note()
+Note::Note(QPointF center, QGraphicsItem *parent) : Node(center, parent)
 {
 
 }

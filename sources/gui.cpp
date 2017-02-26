@@ -164,33 +164,50 @@ Node *GUI::findFirstNodeAt(QPoint point)
 //given from and to, see if they can be linked
 bool GUI::link(Node *from, Node *to)
 {
-    /*
-    switch (from->type()) {
-    case Node::PartType:
-        qDebug() << "From is type Part";
-        break;
-    case Node::MeasureType:
-        qDebug() << "From is type Measure";
-        break;
-    }
-
-    switch (to->type()) {
-    case Node::PartType:
-        qDebug() << "To is type Part";
-        break;
-    case Node::MeasureType:
-        qDebug() << "To is type Measure";
-        break;
-    }
-    */
+    //use braces for each case that static casts
     switch (from->type()) {
     case Node::MeasureType:
+    {
         Measure *measure = static_cast<Measure *>(from);
-        if (to->type() == Node::PartType) {
+
+        switch (to->type()) {
+        case Node::PartType:
+        {
             Part *part = static_cast<Part *>(to);
             part->firstMeasure = measure;
             return true;
         }
+        case Node::MeasureType:
+        {
+            Measure *measureTo = static_cast<Measure *>(to);
+            measureTo->nextMeasure = measure;
+            return true;
+        }
+        }
+
+        break;
+    }
+    case Node::NoteType:
+    {
+        Note *note = static_cast<Note *>(from);
+
+        switch (to->type()) {
+        case Node::MeasureType:
+        {
+            Measure *measureTo = static_cast<Measure *>(to);
+            measureTo->firstNote = note;
+            return true;
+        }
+        case Node::NoteType:
+        {
+            Note *noteTo = static_cast<Note *>(to);
+            noteTo->nextNote = note;
+            return true;
+        }
+        }
+
+        break;
+    }
     }
 
     return false;

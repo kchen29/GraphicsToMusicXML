@@ -9,6 +9,7 @@ public:
     enum {
         PartType = UserType + 1,
         MeasureType,
+        NoteType
     };
 
     Node(QPointF center, QGraphicsItem *parent = nullptr);
