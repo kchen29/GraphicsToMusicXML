@@ -10,7 +10,7 @@ public:
     Part(QGraphicsItem *parent = nullptr);
 
     int part;
-    Measure *firstMeasure;
+    Measure *firstMeasure = nullptr;
 
     int type() const {return PartType;}
 };

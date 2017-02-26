@@ -10,7 +10,7 @@ public:
 
     int step;
     int octave;
-    Note *nextNote;
+    Note *nextNote = nullptr;
 
     int type() const {return NoteType;}
 };

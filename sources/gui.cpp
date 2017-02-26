@@ -158,19 +158,29 @@ Node *GUI::findFirstNodeAt(QPoint point)
     return nullptr;
 }
 
+#define UNIQUE_LINK(toClass, toName, toAttribute, from) do { \
+        toClass *toName = static_cast<toClass *>(to); \
+        if (toName->toAttribute) { \
+            if (toName->toAttribute == from) \
+                return false; \
+            removeLink(toName->toAttribute, to); \
+        } \
+        toName->toAttribute = from; \
+        return true; \
+    } while (0)
+
 //given from and to, see if they can be linked
 bool GUI::link(Node *from, Node *to)
 {
     qDebug() << from->childItems();
 
-    //use braces for each case that static casts
     switch (from->type()) {
     case Node::MeasureType:
     {
         Measure *measure = static_cast<Measure *>(from);
 
         switch (to->type()) {
-        case Node::PartType:
+        case Node::PartType:/*
         {
             Part *part = static_cast<Part *>(to);
             if (part->firstMeasure) {
@@ -180,13 +190,10 @@ bool GUI::link(Node *from, Node *to)
             }
             part->firstMeasure = measure;
             return true;
-        }
+        }*/
+            UNIQUE_LINK(Part, partTo, firstMeasure, measure);
         case Node::MeasureType:
-        {
-            Measure *measureTo = static_cast<Measure *>(to);
-            measureTo->nextMeasure = measure;
-            return true;
-        }
+            UNIQUE_LINK(Measure, measureTo, nextMeasure, measure);
         }
 
         break;
@@ -197,17 +204,9 @@ bool GUI::link(Node *from, Node *to)
 
         switch (to->type()) {
         case Node::MeasureType:
-        {
-            Measure *measureTo = static_cast<Measure *>(to);
-            measureTo->firstNote = note;
-            return true;
-        }
+            UNIQUE_LINK(Measure, measureTo, firstNote, note);
         case Node::NoteType:
-        {
-            Note *noteTo = static_cast<Note *>(to);
-            noteTo->nextNote = note;
-            return true;
-        }
+            UNIQUE_LINK(Note, noteTo, nextNote, note);
         }
 
         break;
@@ -216,6 +215,8 @@ bool GUI::link(Node *from, Node *to)
 
     return false;
 }
+
+#undef UNIQUE_LINK
 
 void GUI::removeLink(Node *from, Node *to)
 {

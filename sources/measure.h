@@ -10,8 +10,8 @@ public:
     Measure(QGraphicsItem *parent = nullptr);
 
     int number;
-    Note *firstNote;
-    Measure *nextMeasure;
+    Note *firstNote = nullptr;
+    Measure *nextMeasure = nullptr;
 
     int type() const {return MeasureType;}
 };
