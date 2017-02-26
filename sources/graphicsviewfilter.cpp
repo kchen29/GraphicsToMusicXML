@@ -1,5 +1,5 @@
 #include <QApplication>
-#include <qmath.h>
+#include <QtMath>
 #include "graphicsviewfilter.h"
 
 bool GraphicsViewFilter::eventFilter(QObject *obj, QEvent *event)
@@ -7,7 +7,7 @@ bool GraphicsViewFilter::eventFilter(QObject *obj, QEvent *event)
     if (event->type() == QEvent::MouseButtonPress) {
         QMouseEvent *m = static_cast<QMouseEvent *>(event);
         if (m->button() == Qt::LeftButton) {
-            emit leftPressed(m);
+            emit leftPressed(m->pos());
             return true;
         } else if (m->button() == Qt::RightButton) {
             lastRightPress = m->pos();

@@ -29,7 +29,7 @@ public:
 
 private slots:
     void openPdf();
-    void cmdAddNode(QMouseEvent *m);
+    void cmdAddNode(QPoint pos);
     void cmdAddLink(QPoint press, QPoint release);
 
 private:

@@ -12,7 +12,7 @@ public:
     explicit GraphicsViewFilter(QGraphicsView *parentView) : QObject(parentView), view(parentView) {}
 
 signals:
-    void leftPressed(QMouseEvent *m);
+    void leftPressed(QPoint pos);
     void rightPressRelease(QPoint press, QPoint release);
 
 protected:

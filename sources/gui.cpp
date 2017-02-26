@@ -108,10 +108,9 @@ void GUI::openPdf()
 }
 
 //the mouse event is in view coordinates
-void GUI::cmdAddNode(QMouseEvent *m)
+void GUI::cmdAddNode(QPoint pos)
 {
-    QPoint viewPos = m->pos();
-    QPointF scenePos = view->mapToScene(viewPos);
+    QPointF scenePos = view->mapToScene(pos);
 
     Node *node = nodeChooser->currentNode();
     node->setPos(scenePos);
