@@ -31,6 +31,7 @@ private slots:
     void cmdAddLink(QPoint press, QPoint release);
 
 private:
+    Node *findFirstNodeAt(QPoint point);
     bool link(Node *from, Node *to);
 
     Ui::GUI *ui;

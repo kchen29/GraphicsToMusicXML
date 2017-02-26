@@ -125,11 +125,8 @@ void GUI::cmdAddNode(QMouseEvent *m)
 void GUI::cmdAddLink(QPoint press, QPoint release)
 {
     //nodes at press and release?
-    QGraphicsItem *pressItem = view->itemAt(press);
-    QGraphicsItem *releaseItem = view->itemAt(release);
-
-    Node *pressNode = dynamic_cast<Node *>(pressItem);
-    Node *releaseNode = dynamic_cast<Node *>(releaseItem);
+    Node *pressNode = findFirstNodeAt(press);
+    Node *releaseNode = findFirstNodeAt(release);
 
     if (!pressNode || !releaseNode) {
         qDebug() << "No press/release item(s)";
@@ -147,6 +144,21 @@ void GUI::cmdAddLink(QPoint press, QPoint release)
 
     //show link in graphics
     new Link(pressNode, releaseNode);
+}
+
+//uses view->items and iterates through to find first Node
+//returns nullptr if none found
+Node *GUI::findFirstNodeAt(QPoint point)
+{
+    QList<QGraphicsItem *> list = view->items(point);
+
+    for (QGraphicsItem *item : list) {
+        Node *node = dynamic_cast<Node *>(item);
+        if (node)
+            return node;
+    }
+
+    return nullptr;
 }
 
 //given from and to, see if they can be linked

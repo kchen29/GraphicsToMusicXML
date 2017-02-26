@@ -14,8 +14,8 @@ public:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
-    //in local coordinates
-    QPointF endpoint;
+private:
+    QPainterPath path;
 };
 
 #endif // LINK_H

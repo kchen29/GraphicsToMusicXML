@@ -1,20 +1,28 @@
 #include <QPainter>
+#include <QtMath>
 #include "link.h"
+#include <QDebug>
 
 Link::Link(Node *fromNode, Node *toNode)
-    : QGraphicsItem(fromNode), endpoint(toNode->pos() - fromNode->pos())
+    : QGraphicsItem(fromNode)
 {
+    //local coordinates
+    QPointF endpoint = toNode->pos() - fromNode->pos();
 
+    QLineF line = QLineF(QPointF(), endpoint);
+    qreal angle = qDegreesToRadians(line.angle());
+
+    qreal r = Node::RADIUS;
+    QPointF starting = QPointF(r * qCos(angle), -r * qSin(angle));
+    QPointF ending = endpoint - starting;
+
+    path.moveTo(starting);
+    path.lineTo(ending);
 }
 
 QRectF Link::boundingRect() const
 {
-    QPointF midpoint = endpoint / 2;
-
-    qreal width = qAbs(endpoint.x());
-    qreal height = qAbs(endpoint.y());
-
-    return QRectF(midpoint.x() - width / 2, midpoint.y() - height / 2, width, height);
+    return path.boundingRect();
 }
 
 void Link::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -23,5 +31,6 @@ void Link::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     Q_UNUSED(widget);
 
     painter->setPen(Qt::green);
-    painter->drawLine(QPointF(0, 0), endpoint);
+    painter->drawPath(path);
 }
+
