@@ -31,6 +31,7 @@ private slots:
     void openPdf();
     void cmdAddNode(QPoint pos);
     void cmdAddLink(QPoint press, QPoint release);
+    void selectNode(QPoint pos);
 
 private:
     Node *findFirstNodeAt(QPoint point);

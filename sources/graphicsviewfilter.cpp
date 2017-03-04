@@ -4,7 +4,10 @@
 
 bool GraphicsViewFilter::eventFilter(QObject *obj, QEvent *event)
 {
-    if (event->type() == QEvent::MouseButtonPress) {
+    bool mouse = obj == viewport;
+    bool key = obj == view;
+
+    if (mouse && event->type() == QEvent::MouseButtonPress) {
         QMouseEvent *m = static_cast<QMouseEvent *>(event);
         if (m->button() == Qt::LeftButton) {
             emit leftPressed(m->pos());
@@ -13,13 +16,13 @@ bool GraphicsViewFilter::eventFilter(QObject *obj, QEvent *event)
             lastRightPress = m->pos();
             return true;
         }
-    } else if (event->type() == QEvent::MouseButtonRelease) {
+    } else if (mouse && event->type() == QEvent::MouseButtonRelease) {
         QMouseEvent *m = static_cast<QMouseEvent *>(event);
         if (m->button() == Qt::RightButton) {
             emit rightPressRelease(lastRightPress, m->pos());
             return true;
         }
-    } else if (event->type() == QEvent::Wheel && QApplication::keyboardModifiers() == Qt::ControlModifier) {
+    } else if (mouse && event->type() == QEvent::Wheel && QApplication::keyboardModifiers() == Qt::ControlModifier) {
         QWheelEvent *w = static_cast<QWheelEvent *>(event);
         if (w->orientation() == Qt::Vertical) {
             double angle = w->angleDelta().y();
@@ -27,6 +30,14 @@ bool GraphicsViewFilter::eventFilter(QObject *obj, QEvent *event)
             QPointF targetViewportPos = w->pos();
             QPointF targetScenePos = view->mapToScene(w->pos());
             zoom(factor, targetViewportPos, targetScenePos);
+            return true;
+        }
+    } else if (key && event->type() == QEvent::KeyPress) {
+        QKeyEvent *k = static_cast<QKeyEvent *>(event);
+        if (k->key() == Qt::Key_Space) {
+            QPoint global = QCursor::pos();
+            QPoint local = view->mapFromGlobal(global);
+            emit spacePressed(local);
             return true;
         }
     }

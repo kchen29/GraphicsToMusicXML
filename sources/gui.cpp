@@ -23,8 +23,10 @@ GUI::GUI(QWidget *parent) :
 
     GraphicsViewFilter *filter = new GraphicsViewFilter(view);
     view->viewport()->installEventFilter(filter);
+    view->installEventFilter(filter);
     connect(filter, &GraphicsViewFilter::leftPressed, this, &GUI::cmdAddNode);
     connect(filter, &GraphicsViewFilter::rightPressRelease, this, &GUI::cmdAddLink);
+    connect(filter, &GraphicsViewFilter::spacePressed, this, &GUI::selectNode);
 
     nodeChooser = new NodeChooser(this);
     ui->mainToolBar->addWidget(nodeChooser);
@@ -140,6 +142,15 @@ void GUI::cmdAddLink(QPoint press, QPoint release)
 
     //show link in graphics
     new Link(pressNode, releaseNode);
+}
+
+void GUI::selectNode(QPoint pos)
+{
+    qDebug() << pos;
+    qDebug() << view->geometry();
+
+    //make sure pos is visible (in view)
+
 }
 
 //uses view->items and iterates through to find first Node
