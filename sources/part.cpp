@@ -1,6 +1,6 @@
 #include "part.h"
 
-Part::Part(QGraphicsItem *parent) : Node(parent)
+Part::Part(QObject *parent) : Node(parent)
 {
 
 }

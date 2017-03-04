@@ -7,7 +7,7 @@
 class Measure : public Node
 {
 public:
-    Measure(QGraphicsItem *parent = nullptr);
+    Measure(QObject *parent = nullptr);
 
     int number;
     Note *firstNote = nullptr;

@@ -27,6 +27,9 @@ public:
     bool getPdf();
     void getPagePixmap();
 
+signals:
+    void selectionChanged(QObject *object);
+
 private slots:
     void openPdf();
     void cmdAddNode(QPoint pos);

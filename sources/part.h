@@ -7,7 +7,7 @@
 class Part : public Node
 {
 public:
-    Part(QGraphicsItem *parent = nullptr);
+    Part(QObject *parent = nullptr);
 
     int part;
     Measure *firstMeasure = nullptr;

@@ -5,11 +5,26 @@
 
 class Note : public Node
 {
+    Q_OBJECT
+    Q_PROPERTY(int octave MEMBER octave)
 public:
-    Note(QGraphicsItem *parent = nullptr);
+    Note(QObject *parent = nullptr);
 
-    int step;
+    enum Step {
+        A,
+        B,
+        C,
+        D,
+        E,
+        F,
+        G
+    };
+
+    Step step;
+
+    qreal alter;
     int octave;
+
     Note *nextNote = nullptr;
 
     int type() const {return NoteType;}

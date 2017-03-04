@@ -150,7 +150,12 @@ void GUI::selectNode(QPoint pos)
     qDebug() << view->geometry();
 
     //make sure pos is visible (in view)
+    if (!view->geometry().contains(pos))
+        return;
 
+    Node *node = findFirstNodeAt(pos);
+
+    emit selectionChanged(node);
 }
 
 //uses view->items and iterates through to find first Node

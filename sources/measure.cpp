@@ -1,6 +1,6 @@
 #include "measure.h"
 
-Measure::Measure(QGraphicsItem *parent) : Node(parent)
+Measure::Measure(QObject *parent) : Node(parent)
 {
 
 }
