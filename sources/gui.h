@@ -9,6 +9,7 @@
 
 #include "node.h"
 #include "nodechooser.h"
+#include "propertyeditor.h"
 
 namespace Ui {
 class GUI;
@@ -49,6 +50,7 @@ private:
     QGraphicsScene *scene;
     QGraphicsView *view;
     NodeChooser *nodeChooser;
+    PropertyEditor *propertyEditor;
 };
 
 #endif // GUI_H

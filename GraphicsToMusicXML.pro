@@ -28,22 +28,24 @@ SOURCES += sources/gui.cpp \
     sources/graphicsviewfilter.cpp \
     sources/node.cpp \
     sources/nodechooser.cpp \
+    sources/propertyeditor.cpp \
     sources/link.cpp \
     sources/part.cpp \
     sources/measure.cpp \
     sources/note.cpp \
     sources/xmlwriter.cpp
 
-
 HEADERS  += sources/gui.h \
     sources/graphicsviewfilter.h \
     sources/node.h \
     sources/nodechooser.h \
+    sources/propertyeditor.h \
     sources/link.h \
     sources/part.h \
     sources/measure.h \
     sources/note.h \
     sources/xmlwriter.h
+
 
 FORMS    += sources/gui.ui
 

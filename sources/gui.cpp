@@ -31,6 +31,10 @@ GUI::GUI(QWidget *parent) :
     nodeChooser = new NodeChooser(this);
     ui->mainToolBar->addWidget(nodeChooser);
 
+    propertyEditor = new PropertyEditor();
+    addDockWidget(Qt::RightDockWidgetArea, propertyEditor);
+    connect(this, &GUI::selectionChanged, propertyEditor, &PropertyEditor::updateEditor);
+
     connect(ui->action_Open_File, &QAction::triggered, this, &GUI::openPdf);
 }
 
