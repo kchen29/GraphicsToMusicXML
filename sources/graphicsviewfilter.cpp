@@ -34,7 +34,7 @@ bool GraphicsViewFilter::eventFilter(QObject *obj, QEvent *event)
         }
     } else if (key && event->type() == QEvent::KeyPress) {
         QKeyEvent *k = static_cast<QKeyEvent *>(event);
-        if (k->key() == Qt::Key_Space) {
+        if (k->key() == Qt::Key_S) {
             QPoint global = QCursor::pos();
             QPoint local = view->mapFromGlobal(global);
             emit spacePressed(local);
