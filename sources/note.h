@@ -6,7 +6,10 @@
 class Note : public Node
 {
     Q_OBJECT
+    Q_PROPERTY(Step step MEMBER step)
+    Q_PROPERTY(double alter MEMBER alter)
     Q_PROPERTY(int octave MEMBER octave)
+
 public:
     Note(QObject *parent = nullptr);
 
@@ -19,11 +22,12 @@ public:
         F,
         G
     };
+    Q_ENUM(Step)
 
-    Step step;
+    Step step = Step::A;
 
-    qreal alter;
-    int octave;
+    qreal alter = 0;
+    int octave = 4;
 
     Note *nextNote = nullptr;
 
