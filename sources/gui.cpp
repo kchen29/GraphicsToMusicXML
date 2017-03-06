@@ -35,7 +35,7 @@ GUI::GUI(QWidget *parent) :
     addDockWidget(Qt::RightDockWidgetArea, propertyEditor);
     connect(this, &GUI::selectionChanged, propertyEditor, &PropertyEditor::updateEditor);
 
-    connect(ui->action_Open_File, &QAction::triggered, this, &GUI::openPdf);
+    connect(ui->action_Open_File, &QAction::triggered, this, &GUI::openFile);
 }
 
 GUI::~GUI()
@@ -44,12 +44,8 @@ GUI::~GUI()
     delete document;
 }
 
-bool GUI::getPdf()
+bool GUI::getPdf(QString filename)
 {
-    QString filter = "PDF (*.pdf)";
-    QString filename = QFileDialog::getOpenFileName(this, "Open File",
-                                                    QString(), filter);
-
     Poppler::Document *tempDocument = Poppler::Document::load(filename);
 
     if (!tempDocument || tempDocument->isLocked()) {
@@ -98,19 +94,42 @@ void GUI::getPagePixmap()
     pagePixmap.convertFromImage(pdfImage);
 }
 
-void GUI::updateScene()
+void GUI::openFile()
 {
-    getPagePixmap();
-    scene->clear();
-    scene->addPixmap(pagePixmap);
-}
+    QStringList filterList;
+    filterList << "PDF (*.pdf)"
+               << "Images (*.bmp *.gif *.jpg *.jpeg *.png *.pbm *.pgm *.ppm *.xbm *.xpm)";
+    QString filters = filterList.at(0);
+    for (int i = 1; i < filterList.length(); i++)
+        filters += ";;" + filterList.at(i);
 
-void GUI::openPdf()
-{
-    if (!getPdf())
+    QString selected;
+    QString filename = QFileDialog::getOpenFileName(this, "Open File",
+                                                    QString(), filters, &selected);
+    if (filename.isNull())
         return;
 
-    updateScene();
+    switch (filterList.indexOf(selected)) {
+    case 0:
+        if (!getPdf(filename))
+            return;
+        getPagePixmap();
+        scene->clear();
+        scene->addPixmap(pagePixmap);
+        break;
+    case 1:
+    {
+        QImage image;
+        if (!image.load(filename))
+            return;
+        QPixmap pixmap;
+        pixmap.convertFromImage(image);
+        scene->clear();
+        scene->addPixmap(pixmap);
+    }
+        break;
+    }
+
 }
 
 //the mouse event is in view coordinates

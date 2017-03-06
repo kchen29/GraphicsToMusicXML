@@ -23,16 +23,14 @@ public:
     explicit GUI(QWidget *parent = 0);
     ~GUI();
 
-    void updateScene();
-
-    bool getPdf();
+    bool getPdf(QString filename);
     void getPagePixmap();
 
 signals:
     void selectionChanged(QObject *object);
 
 private slots:
-    void openPdf();
+    void openFile();
     void cmdAddNode(QPoint pos);
     void cmdAddLink(QPoint press, QPoint release);
     void selectNode(QPoint pos);
