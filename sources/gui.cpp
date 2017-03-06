@@ -9,7 +9,6 @@
 #include "link.h"
 #include "part.h"
 
-
 GUI::GUI(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::GUI)
@@ -42,6 +41,43 @@ GUI::~GUI()
 {
     delete ui;
     delete document;
+}
+
+void GUI::openFile()
+{
+    QStringList filterList;
+    filterList << "PDF (*.pdf)"
+               << "Images (*.bmp *.gif *.jpg *.jpeg *.png *.pbm *.pgm *.ppm *.xbm *.xpm)";
+    QString filters = filterList.at(0);
+    for (int i = 1; i < filterList.length(); i++)
+        filters += ";;" + filterList.at(i);
+
+    QString selected;
+    QString filename = QFileDialog::getOpenFileName(this, "Open File",
+                                                    QString(), filters, &selected);
+    if (filename.isNull())
+        return;
+
+    switch (filterList.indexOf(selected)) {
+    case 0:
+        if (!getPdf(filename))
+            return;
+        getPagePixmap();
+        scene->clear();
+        scene->addPixmap(pagePixmap);
+        break;
+    case 1:
+    {
+        QImage image;
+        if (!image.load(filename))
+            return;
+        QPixmap pixmap;
+        pixmap.convertFromImage(image);
+        scene->clear();
+        scene->addPixmap(pixmap);
+    }
+        break;
+    }
 }
 
 bool GUI::getPdf(QString filename)
@@ -92,44 +128,6 @@ void GUI::getPagePixmap()
     }
 
     pagePixmap.convertFromImage(pdfImage);
-}
-
-void GUI::openFile()
-{
-    QStringList filterList;
-    filterList << "PDF (*.pdf)"
-               << "Images (*.bmp *.gif *.jpg *.jpeg *.png *.pbm *.pgm *.ppm *.xbm *.xpm)";
-    QString filters = filterList.at(0);
-    for (int i = 1; i < filterList.length(); i++)
-        filters += ";;" + filterList.at(i);
-
-    QString selected;
-    QString filename = QFileDialog::getOpenFileName(this, "Open File",
-                                                    QString(), filters, &selected);
-    if (filename.isNull())
-        return;
-
-    switch (filterList.indexOf(selected)) {
-    case 0:
-        if (!getPdf(filename))
-            return;
-        getPagePixmap();
-        scene->clear();
-        scene->addPixmap(pagePixmap);
-        break;
-    case 1:
-    {
-        QImage image;
-        if (!image.load(filename))
-            return;
-        QPixmap pixmap;
-        pixmap.convertFromImage(image);
-        scene->clear();
-        scene->addPixmap(pixmap);
-    }
-        break;
-    }
-
 }
 
 //the mouse event is in view coordinates

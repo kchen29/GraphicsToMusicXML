@@ -23,25 +23,27 @@ public:
     explicit GUI(QWidget *parent = 0);
     ~GUI();
 
-    bool getPdf(QString filename);
-    void getPagePixmap();
-
 signals:
     void selectionChanged(QObject *object);
 
 private slots:
     void openFile();
+
     void cmdAddNode(QPoint pos);
     void cmdAddLink(QPoint press, QPoint release);
     void selectNode(QPoint pos);
 
 private:
+    bool getPdf(QString filename);
+    void getPagePixmap();
+
     Node *findFirstNodeAt(QPoint point);
     bool link(Node *from, Node *to);
     void removeLink(Node *from, Node *to);
 
     Ui::GUI *ui;
 
+    //for PDFs
     Poppler::Document *document = 0;
     QPixmap pagePixmap;
 
