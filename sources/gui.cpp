@@ -35,6 +35,7 @@ GUI::GUI(QWidget *parent) :
     connect(this, &GUI::selectionChanged, propertyEditor, &PropertyEditor::updateEditor);
 
     connect(ui->action_Open_File, &QAction::triggered, this, &GUI::openFile);
+    connect(ui->action_Export_Music_XML, &QAction::triggered, this, &GUI::exportMusicXml);
 }
 
 GUI::~GUI()
@@ -128,6 +129,26 @@ void GUI::getPagePixmap()
     }
 
     pagePixmap.convertFromImage(pdfImage);
+}
+
+void GUI::exportMusicXml()
+{
+    //find part node (for now)
+    QList<QGraphicsItem *> items = scene->items();
+    Part *part = nullptr;
+    for (QGraphicsItem *item : items) {
+        if (item->type() == Node::PartType) {
+            part = static_cast<Part *>(item);
+            break;
+        }
+    }
+    if (part == nullptr) {
+        qDebug() << "Error: Couldn't find part";
+        return;
+    }
+
+    QString filename = QFileDialog::getSaveFileName(this, "Save to file");
+
 }
 
 //the mouse event is in view coordinates
