@@ -8,6 +8,7 @@
 #include "graphicsviewfilter.h"
 #include "link.h"
 #include "part.h"
+#include "xmlwriter.h"
 
 GUI::GUI(QWidget *parent) :
     QMainWindow(parent),
@@ -147,8 +148,16 @@ void GUI::exportMusicXml()
         return;
     }
 
-    QString filename = QFileDialog::getSaveFileName(this, "Save to file");
+    QString filename = QFileDialog::getSaveFileName(this, "Save to file",
+                                                    QString(), "XML (*.xml)");
 
+    QFile file(filename);
+    if (!file.open(QIODevice::WriteOnly)) {
+        qDebug() << "Could not write to file";
+        return;
+    }
+
+    XmlWriter writer(file);
 }
 
 //the mouse event is in view coordinates

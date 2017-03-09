@@ -1,9 +1,16 @@
 #include "xmlwriter.h"
 
-XmlWriter::XmlWriter()
+XmlWriter::XmlWriter(QFile &file)
 {
+    stream.setDevice(&file);
+    stream.setAutoFormatting(true);
 
+    stream.writeStartDocument();
+    stream.writeStartElement("root");
+    stream.writeTextElement("text", "this is text");
+    stream.writeEndDocument();
 }
+
 
 /* leftover from write.cpp
     //Part p;
