@@ -1,3 +1,4 @@
+#include <QMetaEnum>
 #include "xmlwriter.h"
 
 XmlWriter::XmlWriter(QFile &file, Part *part)
@@ -55,8 +56,9 @@ void XmlWriter::writeNote(Note *note)
     stream.writeStartElement("note");
 
     stream.writeStartElement("pitch");
-    //for now
-    stream.writeTextElement("step", QString::number(note->step));
+
+    QMetaEnum meta = QMetaEnum::fromType<Note::Step>();
+    stream.writeTextElement("step", meta.valueToKey(note->step));
     stream.writeTextElement("octave", QString::number(note->octave));
     stream.writeEndElement(); //pitch
 
