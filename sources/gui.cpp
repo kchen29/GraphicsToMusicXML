@@ -157,7 +157,8 @@ void GUI::exportMusicXml()
         return;
     }
 
-    XmlWriter writer(file);
+    //use namespace only eventually?
+    XmlWriter writer(file, part);
 }
 
 //the mouse event is in view coordinates

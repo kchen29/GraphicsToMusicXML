@@ -1,36 +1,64 @@
 #include "xmlwriter.h"
 
-XmlWriter::XmlWriter(QFile &file)
+XmlWriter::XmlWriter(QFile &file, Part *part)
 {
     stream.setDevice(&file);
     stream.setAutoFormatting(true);
+    stream.setAutoFormattingIndent(2);
 
     stream.writeStartDocument();
-    stream.writeStartElement("root");
-    stream.writeTextElement("text", "this is text");
+
+    QString DTD = "<!DOCTYPE score-partwise PUBLIC\n" \
+            "    \"-//Recordare//DTD MusicXML 3.0 Partwise//EN\"\n" \
+            "    \"http://www.musicxml.org/dtds/partwise.dtd\">";
+    stream.writeDTD(DTD);
+
+    stream.writeStartElement("score-partwise");
+    stream.writeAttribute("version", "3.0");
+
+    stream.writeStartElement("part-list");
+    stream.writeStartElement("score-part");
+    stream.writeAttribute("id", "P1");
+    stream.writeTextElement("part-name", "Music");
+    stream.writeEndElement(); //score-part
+    stream.writeEndElement(); //part-list
+
+    writePart(part);
+
     stream.writeEndDocument();
 }
 
+void XmlWriter::writePart(Part *part)
+{
+    stream.writeStartElement("part");
+    stream.writeAttribute("id", "P1");
 
-/* leftover from write.cpp
-    //Part p;
-    Measure m;
-    //Note n;
+    if (part->firstMeasure)
+        writeMeasure(part->firstMeasure);
 
-    //Set values
-    //p.part = 5;
-    m.number = 7;
-    //n.octave = 6;
-    //n.step = 4;
+    stream.writeEndElement(); //part
+}
 
-    //Open file for output
-    std::ofstream myfile;
-    myfile.open ("new.xml");//, ios_base::app (for appending to file)
+void XmlWriter::writeMeasure(Measure *measure)
+{
+    stream.writeStartElement("measure");
+    stream.writeAttribute("number", "1");
 
-    //Introduction
-    myfile <<"<?xml version=\"1.0\" encoding=\"UTF-8\"?> \n";
-    myfile <<"<!DOCTYPE score-partwise PUBLIC \"-//Recordare//DTD MusicXML 3.0 Partwise//EN\" http://www.musicxml.org/dtds/partwise.dtd\">\n";
-    myfile <<"<score-partwise version=\"3.0\">\n";
-    myfile << "Measure number (0) is :" << m.number << "\n";
-    myfile.close();
-    */
+    if (measure->firstNote)
+        writeNote(measure->firstNote);
+
+    stream.writeEndElement(); //measure
+}
+
+void XmlWriter::writeNote(Note *note)
+{
+    stream.writeStartElement("note");
+
+    stream.writeStartElement("pitch");
+    //for now
+    stream.writeTextElement("step", QString::number(note->step));
+    stream.writeTextElement("octave", QString::number(note->octave));
+    stream.writeEndElement(); //pitch
+
+    stream.writeEndElement(); //note
+}

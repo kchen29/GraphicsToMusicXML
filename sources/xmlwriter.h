@@ -4,10 +4,16 @@
 #include <QFile>
 #include <QXmlStreamWriter>
 
+#include "part.h"
+
 class XmlWriter
 {
 public:
-    XmlWriter(QFile &file);
+    XmlWriter(QFile &file, Part *part);
+
+    void writePart(Part *part);
+    void writeMeasure(Measure *measure);
+    void writeNote(Note *note);
 
     QXmlStreamWriter stream;
 };
