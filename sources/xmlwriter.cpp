@@ -49,6 +49,8 @@ void XmlWriter::writeMeasure(Measure *measure)
 
     stream.writeTextElement("divisions", QString::number(measure->divisions));
 
+    if (measure->key)
+        writeKey(measure->key);
     if (measure->clef)
         writeClef(measure->clef);
 
@@ -85,4 +87,11 @@ void XmlWriter::writeClef(Clef *clef)
     stream.writeTextElement("line", QString::number(clef->line));
 
     stream.writeEndElement(); //clef
+}
+
+void XmlWriter::writeKey(Key *key)
+{
+    stream.writeStartElement("key");
+    stream.writeTextElement("fifths", QString::number(key->fifths));
+    stream.writeEndElement();
 }

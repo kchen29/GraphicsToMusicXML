@@ -4,6 +4,7 @@
 #include "node.h"
 #include "note.h"
 #include "clef.h"
+#include "key.h"
 
 class Measure : public Node
 {
@@ -18,7 +19,9 @@ public:
     Note *firstNote = nullptr;
     Measure *nextMeasure = nullptr;
 
+
     Clef *clef = nullptr;
+    Key *key = nullptr;
 
     int type() const {return MeasureType;}
 };

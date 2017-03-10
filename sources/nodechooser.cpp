@@ -1,6 +1,5 @@
 #include "nodechooser.h"
 #include "part.h"
-#include "clef.h"
 
 NodeChooser::NodeChooser(QWidget *parent) : QComboBox(parent)
 {

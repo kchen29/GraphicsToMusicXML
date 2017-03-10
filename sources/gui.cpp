@@ -282,6 +282,15 @@ bool GUI::link(Node *from, Node *to)
             UNIQUE_LINK(Measure, measureTo, clef, clef);
         }
     }
+    case Node::KeyType:
+    {
+        Key *key = static_cast<Key *>(from);
+
+        switch(to->type()) {
+        case Node::MeasureType:
+            UNIQUE_LINK(Measure, measureTo, key, key);
+        }
+    }
     }
 
     return false;

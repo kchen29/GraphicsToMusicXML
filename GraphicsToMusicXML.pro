@@ -43,7 +43,8 @@ HEADERS  += sources/gui.h \
     sources/note.h \
     sources/xmlwriter.h \
     sources/clef.h \
-    sources/nodes.def
+    sources/nodes.def \
+    sources/key.h
 
 
 FORMS    += sources/gui.ui

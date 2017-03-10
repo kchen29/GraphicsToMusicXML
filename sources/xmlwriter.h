@@ -16,6 +16,7 @@ public:
     void writeMeasure(Measure *measure);
     void writeNote(Note *note);
     void writeClef(Clef *clef);
+    void writeKey(Key *key);
 
     QXmlStreamWriter stream;
 };
