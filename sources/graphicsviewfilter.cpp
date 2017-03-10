@@ -37,7 +37,7 @@ bool GraphicsViewFilter::eventFilter(QObject *obj, QEvent *event)
         if (k->key() == Qt::Key_S) {
             QPoint global = QCursor::pos();
             QPoint local = view->mapFromGlobal(global);
-            emit spacePressed(local);
+            emit sPressed(local);
             return true;
         }
     }

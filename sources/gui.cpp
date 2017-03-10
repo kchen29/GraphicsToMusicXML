@@ -26,7 +26,7 @@ GUI::GUI(QWidget *parent) :
     view->installEventFilter(filter);
     connect(filter, &GraphicsViewFilter::leftPressed, this, &GUI::cmdAddNode);
     connect(filter, &GraphicsViewFilter::rightPressRelease, this, &GUI::cmdAddLink);
-    connect(filter, &GraphicsViewFilter::spacePressed, this, &GUI::selectNode);
+    connect(filter, &GraphicsViewFilter::sPressed, this, &GUI::selectNode);
 
     nodeChooser = new NodeChooser(this);
     ui->mainToolBar->addWidget(nodeChooser);

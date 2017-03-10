@@ -14,7 +14,7 @@ public:
 signals:
     void leftPressed(QPoint pos);
     void rightPressRelease(QPoint press, QPoint release);
-    void spacePressed(QPoint pos);
+    void sPressed(QPoint pos);
 
 protected:
     bool eventFilter(QObject *obj, QEvent *event);

@@ -34,6 +34,8 @@ void XmlWriter::writeXml(Part *part)
 
     writePart(part);
 
+    writeEndElement(); //score-partwise
+
     writeEndDocument();
 }
 
