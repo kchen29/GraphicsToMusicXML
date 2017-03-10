@@ -30,9 +30,6 @@ SOURCES += sources/gui.cpp \
     sources/nodechooser.cpp \
     sources/propertyeditor.cpp \
     sources/link.cpp \
-    sources/part.cpp \
-    sources/measure.cpp \
-    sources/note.cpp \
     sources/xmlwriter.cpp
 
 HEADERS  += sources/gui.h \

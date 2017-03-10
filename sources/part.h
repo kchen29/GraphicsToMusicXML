@@ -7,7 +7,7 @@
 class Part : public Node
 {
 public:
-    Part(QObject *parent = nullptr);
+    Part(QObject *parent = nullptr) : Node(parent) {}
 
     int part;
     Measure *firstMeasure = nullptr;

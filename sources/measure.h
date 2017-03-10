@@ -6,10 +6,13 @@
 
 class Measure : public Node
 {
-public:
-    Measure(QObject *parent = nullptr);
+    Q_OBJECT
+    Q_PROPERTY(int divisions MEMBER divisions)
 
-    int number;
+public:
+    Measure(QObject *parent = nullptr) : Node(parent) {}
+
+    int divisions = 1;
     Note *firstNote = nullptr;
     Measure *nextMeasure = nullptr;
 

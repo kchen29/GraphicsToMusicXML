@@ -45,6 +45,10 @@ void XmlWriter::writeMeasure(Measure *measure)
     stream.writeStartElement("measure");
     stream.writeAttribute("number", "1");
 
+    stream.writeStartElement("attributes");
+    stream.writeTextElement("divisions", QString::number(measure->divisions));
+    stream.writeEndElement(); //attributes
+
     if (measure->firstNote)
         writeNote(measure->firstNote);
 
@@ -61,6 +65,8 @@ void XmlWriter::writeNote(Note *note)
     stream.writeTextElement("step", meta.valueToKey(note->step));
     stream.writeTextElement("octave", QString::number(note->octave));
     stream.writeEndElement(); //pitch
+
+    stream.writeTextElement("duration", QString::number(note->duration));
 
     stream.writeEndElement(); //note
 }
