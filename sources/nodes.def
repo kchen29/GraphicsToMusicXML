@@ -1,0 +1,4 @@
+FIRSTNODE(Part)
+NODE(Measure)
+NODE(Note)
+NODE(Clef)

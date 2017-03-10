@@ -13,7 +13,7 @@ public:
 
     Node *currentNode();
 
-    QStringList nodeClasses = {"Part", "Measure", "Note", "Clef"};
+    static const QStringList nodeClasses;
 };
 
 #endif // NODECHOOSER_H

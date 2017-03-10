@@ -11,10 +11,17 @@ public:
     Node(QObject *parent = nullptr);
 
     enum {
+/*
         PartType = UserType + 1,
         MeasureType,
         NoteType,
         ClefType
+*/
+#define FIRSTNODE(node) node##Type = UserType + 1,
+#define NODE(node) node##Type,
+#include "nodes.def"
+#undef NODE
+#undef FIRSTNODE
     };
 
     static constexpr qreal RADIUS = 8;
