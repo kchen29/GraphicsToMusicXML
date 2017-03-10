@@ -54,6 +54,8 @@ void XmlWriter::writeMeasure(Measure *measure)
 
     if (measure->key)
         writeKey(measure->key);
+    if (measure->time)
+        writeTime(measure->time);
     if (measure->clef)
         writeClef(measure->clef);
 
@@ -81,6 +83,21 @@ void XmlWriter::writeNote(Note *note)
     writeEndElement(); //note
 }
 
+void XmlWriter::writeKey(Key *key)
+{
+    writeStartElement("key");
+    writeTextElement("fifths", QString::number(key->fifths));
+    writeEndElement();
+}
+
+void XmlWriter::writeTime(Time *time)
+{
+    writeStartElement("time");
+    writeTextElement("beats", QString::number(time->beats));
+    writeTextElement("beat-type", QString::number(time->beatType));
+    writeEndElement();
+}
+
 void XmlWriter::writeClef(Clef *clef)
 {
     writeStartElement("clef");
@@ -90,11 +107,4 @@ void XmlWriter::writeClef(Clef *clef)
     writeTextElement("line", QString::number(clef->line));
 
     writeEndElement(); //clef
-}
-
-void XmlWriter::writeKey(Key *key)
-{
-    writeStartElement("key");
-    writeTextElement("fifths", QString::number(key->fifths));
-    writeEndElement();
 }

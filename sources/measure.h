@@ -3,8 +3,10 @@
 
 #include "node.h"
 #include "note.h"
-#include "clef.h"
 #include "key.h"
+#include "time.h"
+#include "clef.h"
+
 
 class Measure : public Node
 {
@@ -19,9 +21,9 @@ public:
     Note *firstNote = nullptr;
     Measure *nextMeasure = nullptr;
 
-
-    Clef *clef = nullptr;
     Key *key = nullptr;
+    Time *time = nullptr;
+    Clef *clef = nullptr;
 
     int type() const {return MeasureType;}
 };

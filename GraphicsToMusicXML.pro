@@ -44,7 +44,8 @@ HEADERS  += sources/gui.h \
     sources/xmlwriter.h \
     sources/clef.h \
     sources/nodes.def \
-    sources/key.h
+    sources/key.h \
+    sources/time.h
 
 
 FORMS    += sources/gui.ui

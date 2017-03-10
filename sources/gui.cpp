@@ -278,7 +278,7 @@ bool GUI::link(Node *from, Node *to)
     {
         Clef *clef = static_cast<Clef *>(from);
 
-        switch(to->type()) {
+        switch (to->type()) {
         case Node::MeasureType:
             UNIQUE_LINK(Measure, measureTo, clef, clef);
         }
@@ -287,9 +287,18 @@ bool GUI::link(Node *from, Node *to)
     {
         Key *key = static_cast<Key *>(from);
 
-        switch(to->type()) {
+        switch (to->type()) {
         case Node::MeasureType:
             UNIQUE_LINK(Measure, measureTo, key, key);
+        }
+    }
+    case Node::TimeType:
+    {
+        Time *time = static_cast<Time *>(from);
+
+        switch (to->type()) {
+        case Node::MeasureType:
+            UNIQUE_LINK(Measure, measureTo, time, time);
         }
     }
     }

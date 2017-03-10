@@ -5,7 +5,6 @@
 #include <QXmlStreamWriter>
 
 #include "part.h"
-#include "clef.h"
 
 class XmlWriter : public QXmlStreamWriter
 {
@@ -16,8 +15,9 @@ public:
     void writePart(Part *part);
     void writeMeasure(Measure *measure);
     void writeNote(Note *note);
-    void writeClef(Clef *clef);
     void writeKey(Key *key);
+    void writeTime(Time *time);
+    void writeClef(Clef *clef);
 };
 
 #endif // XMLWRITER_H

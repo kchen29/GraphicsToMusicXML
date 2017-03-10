@@ -1,5 +1,6 @@
 FIRSTNODE(Part)
 NODE(Measure)
 NODE(Note)
-NODE(Clef)
 NODE(Key)
+NODE(Time)
+NODE(Clef)
