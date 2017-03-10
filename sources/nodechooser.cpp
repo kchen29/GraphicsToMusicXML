@@ -1,5 +1,6 @@
 #include "nodechooser.h"
 #include "part.h"
+#include "clef.h"
 
 NodeChooser::NodeChooser(QWidget *parent) : QComboBox(parent)
 {
@@ -16,6 +17,8 @@ Node *NodeChooser::currentNode()
         return new Measure();
     case 2:
         return new Note();
+    case 3:
+        return new Clef();
     }
 
     return nullptr;

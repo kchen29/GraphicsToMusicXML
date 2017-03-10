@@ -3,6 +3,7 @@
 
 #include "node.h"
 #include "note.h"
+#include "clef.h"
 
 class Measure : public Node
 {
@@ -13,8 +14,11 @@ public:
     Measure(QObject *parent = nullptr) : Node(parent) {}
 
     int divisions = 1;
+
     Note *firstNote = nullptr;
     Measure *nextMeasure = nullptr;
+
+    Clef *clef = nullptr;
 
     int type() const {return MeasureType;}
 };

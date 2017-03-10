@@ -13,7 +13,8 @@ public:
     enum {
         PartType = UserType + 1,
         MeasureType,
-        NoteType
+        NoteType,
+        ClefType
     };
 
     static const QStringList nodeClasses;

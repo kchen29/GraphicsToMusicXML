@@ -46,7 +46,12 @@ void XmlWriter::writeMeasure(Measure *measure)
     stream.writeAttribute("number", "1");
 
     stream.writeStartElement("attributes");
+
     stream.writeTextElement("divisions", QString::number(measure->divisions));
+
+    if (measure->clef)
+        writeClef(measure->clef);
+
     stream.writeEndElement(); //attributes
 
     if (measure->firstNote)
@@ -69,4 +74,15 @@ void XmlWriter::writeNote(Note *note)
     stream.writeTextElement("duration", QString::number(note->duration));
 
     stream.writeEndElement(); //note
+}
+
+void XmlWriter::writeClef(Clef *clef)
+{
+    stream.writeStartElement("clef");
+
+    QMetaEnum meta = QMetaEnum::fromType<Clef::Sign>();
+    stream.writeTextElement("sign", meta.valueToKey(clef->sign));
+    stream.writeTextElement("line", QString::number(clef->line));
+
+    stream.writeEndElement(); //clef
 }

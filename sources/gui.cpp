@@ -198,9 +198,6 @@ void GUI::cmdAddLink(QPoint press, QPoint release)
 
 void GUI::selectNode(QPoint pos)
 {
-    qDebug() << pos;
-    qDebug() << view->geometry();
-
     //make sure pos is visible (in view)
     if (!view->geometry().contains(pos))
         return;
@@ -239,8 +236,6 @@ Node *GUI::findFirstNodeAt(QPoint point)
 //given from and to, see if they can be linked
 bool GUI::link(Node *from, Node *to)
 {
-    qDebug() << from->childItems();
-
     switch (from->type()) {
     case Node::MeasureType:
     {
@@ -277,6 +272,15 @@ bool GUI::link(Node *from, Node *to)
         }
 
         break;
+    }
+    case Node::ClefType:
+    {
+        Clef *clef = static_cast<Clef *>(from);
+
+        switch(to->type()) {
+        case Node::MeasureType:
+            UNIQUE_LINK(Measure, measureTo, clef, clef);
+        }
     }
     }
 
