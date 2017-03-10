@@ -11,6 +11,10 @@ class XmlWriter : public QXmlStreamWriter
 public:
     XmlWriter(QFile &file);
 
+    //overload writeTextElement for convenience
+    using QXmlStreamWriter::writeTextElement;
+    void writeTextElement(const QString string, int textValue);
+
     void writeXml(Part *part);
     void writePart(Part *part);
     void writeMeasure(Measure *measure);

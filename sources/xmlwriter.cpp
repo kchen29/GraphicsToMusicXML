@@ -8,6 +8,11 @@ XmlWriter::XmlWriter(QFile &file)
     setAutoFormattingIndent(2);
 }
 
+void XmlWriter::writeTextElement(const QString string, int textValue)
+{
+    writeTextElement(string, QString::number(textValue));
+}
+
 void XmlWriter::writeXml(Part *part)
 {
     writeStartDocument();
@@ -50,7 +55,7 @@ void XmlWriter::writeMeasure(Measure *measure)
 
     writeStartElement("attributes");
 
-    writeTextElement("divisions", QString::number(measure->divisions));
+    writeTextElement("divisions", measure->divisions);
 
     if (measure->key)
         writeKey(measure->key);
@@ -75,10 +80,10 @@ void XmlWriter::writeNote(Note *note)
 
     QMetaEnum meta = QMetaEnum::fromType<Note::Step>();
     writeTextElement("step", meta.valueToKey(note->step));
-    writeTextElement("octave", QString::number(note->octave));
+    writeTextElement("octave", note->octave);
     writeEndElement(); //pitch
 
-    writeTextElement("duration", QString::number(note->duration));
+    writeTextElement("duration", note->duration);
 
     writeEndElement(); //note
 }
@@ -86,16 +91,16 @@ void XmlWriter::writeNote(Note *note)
 void XmlWriter::writeKey(Key *key)
 {
     writeStartElement("key");
-    writeTextElement("fifths", QString::number(key->fifths));
-    writeEndElement();
+    writeTextElement("fifths", key->fifths);
+    writeEndElement(); //key
 }
 
 void XmlWriter::writeTime(Time *time)
 {
     writeStartElement("time");
-    writeTextElement("beats", QString::number(time->beats));
-    writeTextElement("beat-type", QString::number(time->beatType));
-    writeEndElement();
+    writeTextElement("beats", time->beats);
+    writeTextElement("beat-type", time->beatType);
+    writeEndElement(); //time
 }
 
 void XmlWriter::writeClef(Clef *clef)
@@ -104,7 +109,7 @@ void XmlWriter::writeClef(Clef *clef)
 
     QMetaEnum meta = QMetaEnum::fromType<Clef::Sign>();
     writeTextElement("sign", meta.valueToKey(clef->sign));
-    writeTextElement("line", QString::number(clef->line));
+    writeTextElement("line", clef->line);
 
     writeEndElement(); //clef
 }
