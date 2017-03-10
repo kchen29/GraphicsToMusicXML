@@ -4,10 +4,10 @@
 
 NodeChooser::NodeChooser(QWidget *parent) : QComboBox(parent)
 {
-    addItems(Node::nodeClasses);
+    addItems(nodeClasses);
 }
 
-//keep in line with Node::nodeClasses
+//keep in line with nodeClasses
 Node *NodeChooser::currentNode()
 {
     switch (currentIndex()) {

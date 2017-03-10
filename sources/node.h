@@ -17,8 +17,6 @@ public:
         ClefType
     };
 
-    static const QStringList nodeClasses;
-
     static constexpr qreal RADIUS = 8;
 };
 

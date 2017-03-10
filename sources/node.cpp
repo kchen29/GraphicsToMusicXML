@@ -7,5 +7,3 @@ Node::Node(QObject *parent)
 {
     setBrush( QBrush(Qt::blue) );
 }
-
-const QStringList Node::nodeClasses = {"Part", "Measure", "Note", "Clef"};

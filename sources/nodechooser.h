@@ -12,6 +12,8 @@ public:
     NodeChooser(QWidget *parent = nullptr);
 
     Node *currentNode();
+
+    QStringList nodeClasses = {"Part", "Measure", "Note", "Clef"};
 };
 
 #endif // NODECHOOSER_H
