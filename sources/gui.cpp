@@ -256,7 +256,17 @@ bool GUI::link(Node *from, Node *to)
         }*/
             UNIQUE_LINK(Part, partTo, firstMeasure, measure);
         case Node::MeasureType:
-            UNIQUE_LINK(Measure, measureTo, nextMeasure, measure);
+        {
+            Measure *measureTo = static_cast<Measure *>(to);
+            if (measureTo->nextMeasure) {
+                if (measureTo->nextMeasure == measure)
+                    return false;
+                removeLink(measureTo->nextMeasure, to);
+            }
+            measureTo->nextMeasure = measure;
+            measure->number = measureTo->number + 1;
+            return true;
+        }
         }
 
         break;

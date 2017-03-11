@@ -44,8 +44,11 @@ void XmlWriter::writePart(Part *part)
     writeStartElement("part");
     writeAttribute("id", "P1");
 
-    if (part->firstMeasure)
-        writeMeasure(part->firstMeasure);
+    Measure *measure = part->firstMeasure;
+    while (measure) {
+        writeMeasure(measure);
+        measure = measure->nextMeasure;
+    }
 
     writeEndElement(); //part
 }
@@ -53,23 +56,29 @@ void XmlWriter::writePart(Part *part)
 void XmlWriter::writeMeasure(Measure *measure)
 {
     writeStartElement("measure");
-    writeAttribute("number", "1");
+    writeAttribute("number", QString::number(measure->number));
 
-    writeStartElement("attributes");
+    //for now
+    if (measure->number == 1) {
+        writeStartElement("attributes");
 
-    writeTextElement("divisions", measure->divisions);
+        writeTextElement("divisions", measure->divisions);
 
-    if (measure->key)
-        writeKey(measure->key);
-    if (measure->time)
-        writeTime(measure->time);
-    if (measure->clef)
-        writeClef(measure->clef);
+        if (measure->key)
+            writeKey(measure->key);
+        if (measure->time)
+            writeTime(measure->time);
+        if (measure->clef)
+            writeClef(measure->clef);
 
-    writeEndElement(); //attributes
+        writeEndElement(); //attributes
+    }
 
-    if (measure->firstNote)
-        writeNote(measure->firstNote);
+    Note *note = measure->firstNote;
+    while (note) {
+        writeNote(note);
+        note = note->nextNote;
+    }
 
     writeEndElement(); //measure
 }
