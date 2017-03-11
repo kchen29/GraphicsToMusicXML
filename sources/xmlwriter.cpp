@@ -13,7 +13,7 @@ void XmlWriter::writeTextElement(const QString string, int textValue)
     writeTextElement(string, QString::number(textValue));
 }
 
-void XmlWriter::writeXml(Part *part)
+void XmlWriter::writeXml(Score *score)
 {
     writeStartDocument();
 
@@ -22,27 +22,50 @@ void XmlWriter::writeXml(Part *part)
             "    \"http://www.musicxml.org/dtds/partwise.dtd\">";
     writeDTD(DTD);
 
+    writeScore(score);
+
+    writeEndDocument();
+}
+
+void XmlWriter::writeScore(Score *score)
+{
     writeStartElement("score-partwise");
     writeAttribute("version", "3.0");
 
     writeStartElement("part-list");
-    writeStartElement("score-part");
-    writeAttribute("id", "P1");
-    writeTextElement("part-name", "Music");
-    writeEndElement(); //score-part
+
+    {
+        int i = 1;
+        Part *part = score->firstPart;
+        while (part) {
+            part->id = "P" + QString::number(i);
+
+            writeStartElement("score-part");
+            writeAttribute("id", part->id);
+            //for now
+            writeTextElement("part-name", part->name);
+            writeEndElement(); //score-part
+
+            i++;
+            part = part->nextPart;
+        }
+    }
+
     writeEndElement(); //part-list
 
-    writePart(part);
+    Part *part = score->firstPart;
+    while (part) {
+        writePart(part);
+        part = part->nextPart;
+    }
 
     writeEndElement(); //score-partwise
-
-    writeEndDocument();
 }
 
 void XmlWriter::writePart(Part *part)
 {
     writeStartElement("part");
-    writeAttribute("id", "P1");
+    writeAttribute("id", part->id);
 
     Measure *measure = part->firstMeasure;
     while (measure) {

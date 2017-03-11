@@ -1,4 +1,5 @@
-FIRSTNODE(Part)
+FIRSTNODE(Score)
+NODE(Part)
 NODE(Measure)
 NODE(Note)
 NODE(Key)

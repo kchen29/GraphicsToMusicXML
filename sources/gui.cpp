@@ -7,7 +7,7 @@
 #include "ui_gui.h"
 #include "graphicsviewfilter.h"
 #include "link.h"
-#include "part.h"
+#include "score.h"
 #include "xmlwriter.h"
 
 GUI::GUI(QWidget *parent) :
@@ -136,15 +136,15 @@ void GUI::exportMusicXml()
 {
     //find part node (for now)
     QList<QGraphicsItem *> items = scene->items();
-    Part *part = nullptr;
+    Score *score = nullptr;
     for (QGraphicsItem *item : items) {
-        if (item->type() == Node::PartType) {
-            part = static_cast<Part *>(item);
+        if (item->type() == Node::ScoreType) {
+            score = static_cast<Score *>(item);
             break;
         }
     }
-    if (part == nullptr) {
-        qDebug() << "Error: Couldn't find part";
+    if (score == nullptr) {
+        qDebug() << "Error: Couldn't find score";
         return;
     }
 
@@ -159,7 +159,7 @@ void GUI::exportMusicXml()
 
     //use namespace only eventually?
     XmlWriter writer(file);
-    writer.writeXml(part);
+    writer.writeXml(score);
 }
 
 //the mouse event is in view coordinates
@@ -238,6 +238,17 @@ Node *GUI::findFirstNodeAt(QPoint point)
 bool GUI::link(Node *from, Node *to)
 {
     switch (from->type()) {
+    case Node::PartType:
+    {
+        Part *part = static_cast<Part *>(from);
+
+        switch (to->type()) {
+        case Node::ScoreType:
+            UNIQUE_LINK(Score, scoreTo, firstPart, part);
+        case Node::PartType:
+            UNIQUE_LINK(Part, partTo, nextPart, part);
+        }
+    }
     case Node::MeasureType:
     {
         Measure *measure = static_cast<Measure *>(from);

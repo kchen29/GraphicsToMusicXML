@@ -4,7 +4,7 @@
 #include <QFile>
 #include <QXmlStreamWriter>
 
-#include "part.h"
+#include "score.h"
 
 class XmlWriter : public QXmlStreamWriter
 {
@@ -15,7 +15,9 @@ public:
     using QXmlStreamWriter::writeTextElement;
     void writeTextElement(const QString string, int textValue);
 
-    void writeXml(Part *part);
+    void writeXml(Score *score);
+
+    void writeScore(Score *score);
     void writePart(Part *part);
     void writeMeasure(Measure *measure);
     void writeNote(Note *note);

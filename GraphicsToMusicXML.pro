@@ -45,7 +45,8 @@ HEADERS  += sources/gui.h \
     sources/clef.h \
     sources/nodes.def \
     sources/key.h \
-    sources/time.h
+    sources/time.h \
+    sources/score.h
 
 
 FORMS    += sources/gui.ui

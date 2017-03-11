@@ -6,10 +6,16 @@
 
 class Part : public Node
 {
+    Q_OBJECT
+    Q_PROPERTY(QString name MEMBER name)
+
 public:
     Part(QObject *parent = nullptr) : Node(parent) {}
 
-    int part;
+    QString id;
+    QString name;
+
+    Part *nextPart = nullptr;
     Measure *firstMeasure = nullptr;
 
     int type() const {return PartType;}
