@@ -34,30 +34,21 @@ void XmlWriter::writeScore(Score *score)
 
     writeStartElement("part-list");
 
-    {
-        int i = 1;
-        Part *part = score->firstPart;
-        while (part) {
-            part->id = "P" + QString::number(i);
+    int i = 1;
+    for (Part *part = score->firstPart; part; part = part->nextPart) {
+        part->id = "P" + QString::number(i);
+        i++;
 
-            writeStartElement("score-part");
-            writeAttribute("id", part->id);
-            //for now
-            writeTextElement("part-name", part->name);
-            writeEndElement(); //score-part
-
-            i++;
-            part = part->nextPart;
-        }
+        writeStartElement("score-part");
+        writeAttribute("id", part->id);
+        writeTextElement("part-name", part->name);
+        writeEndElement(); //score-part
     }
 
     writeEndElement(); //part-list
 
-    Part *part = score->firstPart;
-    while (part) {
+    for (Part *part = score->firstPart; part; part = part->nextPart)
         writePart(part);
-        part = part->nextPart;
-    }
 
     writeEndElement(); //score-partwise
 }
@@ -67,11 +58,8 @@ void XmlWriter::writePart(Part *part)
     writeStartElement("part");
     writeAttribute("id", part->id);
 
-    Measure *measure = part->firstMeasure;
-    while (measure) {
+    for (Measure *measure = part->firstMeasure; measure; measure = measure->nextMeasure)
         writeMeasure(measure);
-        measure = measure->nextMeasure;
-    }
 
     writeEndElement(); //part
 }
@@ -97,11 +85,8 @@ void XmlWriter::writeMeasure(Measure *measure)
         writeEndElement(); //attributes
     }
 
-    Note *note = measure->firstNote;
-    while (note) {
+    for (Note *note = measure->firstNote; note; note = note->nextNote)
         writeNote(note);
-        note = note->nextNote;
-    }
 
     writeEndElement(); //measure
 }

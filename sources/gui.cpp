@@ -134,7 +134,7 @@ void GUI::getPagePixmap()
 
 void GUI::exportMusicXml()
 {
-    //find part node (for now)
+    //find score node (for now)
     QList<QGraphicsItem *> items = scene->items();
     Score *score = nullptr;
     for (QGraphicsItem *item : items) {
