@@ -10,6 +10,7 @@ class Note : public Node
     Q_PROPERTY(double alter MEMBER alter)
     Q_PROPERTY(int octave MEMBER octave)
     Q_PROPERTY(int duration MEMBER duration)
+    Q_PROPERTY(int staff MEMBER staff)
 
 public:
     Note(QObject *parent = nullptr) : Node(parent) {}
@@ -30,6 +31,8 @@ public:
     int octave = 4;
 
     int duration = 1;
+
+    int staff = 1;
 
     Note *nextNote = nullptr;
 

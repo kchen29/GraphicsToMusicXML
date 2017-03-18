@@ -40,6 +40,7 @@ private:
 
     Node *findFirstNodeAt(QPoint point);
     bool link(Node *from, Node *to);
+    void linkSideEffects(Node *from, Node *to);
     void removeLink(Node *from, Node *to);
 
     Ui::GUI *ui;

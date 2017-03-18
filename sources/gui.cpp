@@ -193,6 +193,8 @@ void GUI::cmdAddLink(QPoint press, QPoint release)
         return;
     }
 
+    linkSideEffects(pressNode, releaseNode);
+
     //show link in graphics
     new Link(pressNode, releaseNode);
 }
@@ -248,6 +250,8 @@ bool GUI::link(Node *from, Node *to)
         case Node::PartType:
             UNIQUE_LINK(Part, partTo, nextPart, part);
         }
+
+        break;
     }
     case Node::MeasureType:
     {
@@ -267,17 +271,7 @@ bool GUI::link(Node *from, Node *to)
         }*/
             UNIQUE_LINK(Part, partTo, firstMeasure, measure);
         case Node::MeasureType:
-        {
-            Measure *measureTo = static_cast<Measure *>(to);
-            if (measureTo->nextMeasure) {
-                if (measureTo->nextMeasure == measure)
-                    return false;
-                removeLink(measureTo->nextMeasure, to);
-            }
-            measureTo->nextMeasure = measure;
-            measure->number = measureTo->number + 1;
-            return true;
-        }
+            UNIQUE_LINK(Measure, measureTo, nextMeasure, measure);
         }
 
         break;
@@ -303,6 +297,8 @@ bool GUI::link(Node *from, Node *to)
         case Node::MeasureType:
             UNIQUE_LINK(Measure, measureTo, clef, clef);
         }
+
+        break;
     }
     case Node::KeyType:
     {
@@ -312,6 +308,8 @@ bool GUI::link(Node *from, Node *to)
         case Node::MeasureType:
             UNIQUE_LINK(Measure, measureTo, key, key);
         }
+
+        break;
     }
     case Node::TimeType:
     {
@@ -321,10 +319,44 @@ bool GUI::link(Node *from, Node *to)
         case Node::MeasureType:
             UNIQUE_LINK(Measure, measureTo, time, time);
         }
+
+        break;
     }
     }
 
     return false;
+}
+
+void GUI::linkSideEffects(Node *from, Node *to)
+{
+    switch (from->type()) {
+    case Node::MeasureType: {
+        Measure *measure = static_cast<Measure *>(from);
+
+        switch (to->type()) {
+        case Node::MeasureType: {
+            Measure *measureTo = static_cast<Measure *>(to);
+            measure->number = measureTo->number + 1;
+            break;
+        }
+        }
+
+        break;
+    }
+    case Node::NoteType: {
+        Note *note = static_cast<Note *>(from);
+
+        switch (to->type()) {
+        case Node::NoteType: {
+            Note *noteTo = static_cast<Note *>(to);
+            note->staff = noteTo->staff;
+            break;
+        }
+        }
+
+        break;
+    }
+    }
 }
 
 #undef UNIQUE_LINK
