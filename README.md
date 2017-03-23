@@ -7,14 +7,17 @@ It is written in C++ with the Qt framework.
 GraphicsToMusicXML is licensed under GPLv3.
 
 ## Features
+* Import graphics in the formats of pdf, jpg, png, gif, bmp, pbm, pgm, ppm, xbm, xpm
+* Basic multi-part score
+  * parts only have 1 staff (for now)
+* supported elements:
+  * Score, Part, Measure
+  * Note
+  * Key, Time, Clef
+* Export music xml
 
 ### Planned
-* Takes graphics in form of PDFs, and other image formats.
-* Basic Workings
-  * 
-
-#### Far plans
-* OMR
+* basic OMR
 
 ## Development Status
 Beginning stages of development.
