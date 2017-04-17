@@ -30,7 +30,8 @@ SOURCES += core/main.cpp \
     gui/node.cpp \
     gui/nodechooser.cpp \
     gui/propertyeditor.cpp \
-    xml/xmlwriter.cpp
+    xml/xmlwriter.cpp \
+    omr/omr.cpp
 
 HEADERS  += core/clef.h \
     core/key.h \
@@ -47,7 +48,8 @@ HEADERS  += core/clef.h \
     gui/nodechooser.h \
     gui/propertyeditor.h \
     xml/xmlwriter.h \
-    core/node.h
+    core/node.h \
+    omr/omr.h
 
 FORMS    += gui/gui.ui
 

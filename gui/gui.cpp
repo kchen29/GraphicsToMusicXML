@@ -65,22 +65,20 @@ void GUI::openFile()
     case 0:
         if (!getPdf(filename))
             return;
-        getPagePixmap();
-        scene->clear();
-        scene->addPixmap(pagePixmap);
+        pixmap = getPagePixmap();
         break;
     case 1:
     {
         QImage image;
         if (!image.load(filename))
             return;
-        QPixmap pixmap;
         pixmap.convertFromImage(image);
-        scene->clear();
-        scene->addPixmap(pixmap);
     }
         break;
     }
+
+    scene->clear();
+    scene->addPixmap(pixmap);
 }
 
 bool GUI::getPdf(QString filename)
@@ -103,13 +101,13 @@ bool GUI::getPdf(QString filename)
     return true;
 }
 
-void GUI::getPagePixmap()
+QPixmap GUI::getPagePixmap()
 {
     Poppler::Page *pdfPage = document->page(0);
 
     if (pdfPage == 0) {
         qDebug() << "Error getting PDF page";
-        return;
+        return QPixmap();
     }
 
     //get the smaller resolution
@@ -127,10 +125,10 @@ void GUI::getPagePixmap()
 
     if (pdfImage.isNull()) {
         qDebug() << "Error rendering pdf image";
-        return;
+        return QPixmap();
     }
 
-    pagePixmap.convertFromImage(pdfImage);
+    return QPixmap::fromImage(pdfImage);
 }
 
 void GUI::exportMusicXml()
@@ -165,7 +163,7 @@ void GUI::exportMusicXml()
 
 void GUI::runOMR()
 {
-    qDebug() << "Running OMR";
+    QImage omrImage = pixmap.toImage();
 }
 
 //the mouse event is in view coordinates

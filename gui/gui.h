@@ -37,7 +37,7 @@ private slots:
 
 private:
     bool getPdf(QString filename);
-    void getPagePixmap();
+    QPixmap getPagePixmap();
 
     Node *findFirstNodeAt(QPoint point);
     bool link(Node *from, Node *to);
@@ -48,7 +48,7 @@ private:
 
     //for PDFs
     Poppler::Document *document = 0;
-    QPixmap pagePixmap;
+    QPixmap pixmap;
 
     QGraphicsScene *scene;
     QGraphicsView *view;
