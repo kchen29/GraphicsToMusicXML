@@ -37,6 +37,7 @@ GUI::GUI(QWidget *parent) :
 
     connect(ui->action_Open_File, &QAction::triggered, this, &GUI::openFile);
     connect(ui->action_Export_Music_XML, &QAction::triggered, this, &GUI::exportMusicXml);
+    connect(ui->action_Run_OMR, &QAction::triggered, this, &GUI::runOMR);
 }
 
 GUI::~GUI()
@@ -160,6 +161,11 @@ void GUI::exportMusicXml()
     //use namespace only eventually?
     XmlWriter writer(file);
     writer.writeXml(score);
+}
+
+void GUI::runOMR()
+{
+    qDebug() << "Running OMR";
 }
 
 //the mouse event is in view coordinates

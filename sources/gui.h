@@ -29,6 +29,7 @@ signals:
 private slots:
     void openFile();
     void exportMusicXml();
+    void runOMR();
 
     void cmdAddNode(QPoint pos);
     void cmdAddLink(QPoint press, QPoint release);
