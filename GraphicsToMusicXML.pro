@@ -23,33 +23,33 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 
-SOURCES += sources/gui.cpp \
-    sources/main.cpp \
-    sources/graphicsviewfilter.cpp \
-    sources/node.cpp \
-    sources/nodechooser.cpp \
-    sources/propertyeditor.cpp \
-    sources/link.cpp \
-    sources/xmlwriter.cpp
+SOURCES += core/main.cpp \
+    gui/graphicsviewfilter.cpp \
+    gui/gui.cpp \
+    gui/link.cpp \
+    gui/node.cpp \
+    gui/nodechooser.cpp \
+    gui/propertyeditor.cpp \
+    xml/xmlwriter.cpp
 
-HEADERS  += sources/gui.h \
-    sources/graphicsviewfilter.h \
-    sources/node.h \
-    sources/nodechooser.h \
-    sources/propertyeditor.h \
-    sources/link.h \
-    sources/part.h \
-    sources/measure.h \
-    sources/note.h \
-    sources/xmlwriter.h \
-    sources/clef.h \
-    sources/nodes.def \
-    sources/key.h \
-    sources/time.h \
-    sources/score.h
+HEADERS  += core/clef.h \
+    core/key.h \
+    core/measure.h \
+    core/note.h \
+    core/nodes.def \
+    core/part.h \
+    core/score.h \
+    core/time.h \
+    gui/graphicsviewfilter.h \
+    gui/gui.h \
+    gui/link.h \
+    gui/node.h \
+    gui/nodechooser.h \
+    gui/propertyeditor.h \
+    xml/xmlwriter.h \
+    core/node.h
 
-
-FORMS    += sources/gui.ui
+FORMS    += gui/gui.ui
 
 unix: CONFIG += link_pkgconfig
 unix: PKGCONFIG += poppler-qt5

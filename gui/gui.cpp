@@ -7,8 +7,8 @@
 #include "ui_gui.h"
 #include "graphicsviewfilter.h"
 #include "link.h"
-#include "score.h"
-#include "xmlwriter.h"
+#include "../core/score.h"
+#include "../xml/xmlwriter.h"
 
 GUI::GUI(QWidget *parent) :
     QMainWindow(parent),

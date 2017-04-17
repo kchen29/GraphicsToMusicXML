@@ -1,5 +1,5 @@
 #include "nodechooser.h"
-#include "score.h"
+#include "../core/score.h"
 
 NodeChooser::NodeChooser(QWidget *parent) : QComboBox(parent)
 {
@@ -25,7 +25,7 @@ Node *NodeChooser::currentNode()
     int i = 0;
 #define FIRSTNODE(node) if (index == i++) return new node();
 #define NODE(node) FIRSTNODE(node)
-#include "nodes.def"
+#include "../core/nodes.def"
 #undef NODE
 #undef FIRSTNODE
 
@@ -36,7 +36,7 @@ Node *NodeChooser::currentNode()
 const QStringList NodeChooser::nodeClasses = {
     #define FIRSTNODE(node) #node,
     #define NODE(node) FIRSTNODE(node)
-    #include "nodes.def"
+    #include "../core/nodes.def"
     #undef NODE
     #undef FIRSTNODE
 };

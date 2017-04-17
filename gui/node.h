@@ -19,7 +19,7 @@ public:
 */
 #define FIRSTNODE(node) node##Type = UserType + 1,
 #define NODE(node) node##Type,
-#include "nodes.def"
+#include "../core/nodes.def"
 #undef NODE
 #undef FIRSTNODE
     };

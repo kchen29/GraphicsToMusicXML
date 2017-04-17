@@ -4,7 +4,7 @@
 #include <QFile>
 #include <QXmlStreamWriter>
 
-#include "score.h"
+#include "../core/score.h"
 
 class XmlWriter : public QXmlStreamWriter
 {
