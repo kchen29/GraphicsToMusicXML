@@ -9,6 +9,7 @@
 #include "link.h"
 #include "../core/score.h"
 #include "../xml/xmlwriter.h"
+#include "../omr/omr.h"
 
 GUI::GUI(QWidget *parent) :
     QMainWindow(parent),
@@ -164,6 +165,8 @@ void GUI::exportMusicXml()
 void GUI::runOMR()
 {
     QImage omrImage = pixmap.toImage();
+    Omr omr = Omr(pixmap, omrImage);
+    omr.runOMR();
 }
 
 //the mouse event is in view coordinates

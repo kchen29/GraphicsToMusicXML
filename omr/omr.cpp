@@ -1,6 +1,15 @@
 #include "omr.h"
 
-Omr::Omr()
+Omr::Omr(QPixmap pixmap, QImage omrImage) : scenePixmap(pixmap), image(omrImage)
+{
+}
+
+void Omr::runOMR()
+{
+    binarize();
+}
+
+void Omr::binarize()
 {
 
 }
