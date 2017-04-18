@@ -7,7 +7,7 @@
 class Omr
 {
 public:
-    Omr(QPixmap pixmap, QImage omrImage);
+    Omr(QPixmap &pixmap, QImage omrImage);
 
     void runOMR();
 
