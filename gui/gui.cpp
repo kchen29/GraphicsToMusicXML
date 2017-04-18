@@ -165,7 +165,7 @@ void GUI::exportMusicXml()
 void GUI::runOMR()
 {
     QImage omrImage = pixmap.toImage();
-    Omr omr = Omr(pixmap, omrImage);
+    Omr omr = Omr(omrImage);
     omr.runOMR();
 }
 
